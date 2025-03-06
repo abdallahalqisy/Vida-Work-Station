@@ -43,6 +43,8 @@ class LoginScreen extends StatelessWidget {
               CustomTixtFormField(hintText: 'Password', obscureText: true),
               SizedBox(height: 40.h),
               CustomButton(
+                color: const Color(0xff003367),
+                minWidth: 250,
                 text: 'Login',
                 onPressed: () {
                   Navigator.push(
