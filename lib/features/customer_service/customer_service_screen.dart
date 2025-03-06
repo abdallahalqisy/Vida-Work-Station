@@ -45,10 +45,10 @@ class _CustomerServiceScreenState extends State<CustomerServiceScreen> {
           width: double.infinity,
           color: const Color(0xff003367),
           child: Center(
-            child: GifView.asset(
-              'assets/images/loding.gif',
-              controller: _gifController,
-            ),
+            // child: GifView.asset(
+            //   'assets/images/loding.gif',
+            //   controller: _gifController,
+            // ),
           ),
         ),
       ),

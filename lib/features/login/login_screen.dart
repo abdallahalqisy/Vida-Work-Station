@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:vida/constants/theme.dart';
 import 'package:vida/features/home/home_screen.dart';
 import 'package:vida/features/login/widget/custom_button.dart';
-import 'package:vida/features/login/widget/custom_text_form_field.dart'; // تأكد من أن المسار صحيح
+import 'package:vida/features/login/widget/custom_text_form_field.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+  LoginScreen({super.key});
+
+  String? email, password;
+  final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -43,8 +47,6 @@ class LoginScreen extends StatelessWidget {
               CustomTixtFormField(hintText: 'Password', obscureText: true),
               SizedBox(height: 40.h),
               CustomButton(
-                color: const Color(0xff003367),
-                minWidth: 250,
                 text: 'Login',
                 onPressed: () {
                   Navigator.push(
