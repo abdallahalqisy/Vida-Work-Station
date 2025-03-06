@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vida/features/home/home_screen.dart';
+import 'package:vida/features/login/login_screen.dart';
 
 void main() {
   runApp(const VidaApp());
@@ -16,7 +17,10 @@ class VidaApp extends StatelessWidget {
       designSize: const Size(375, 812),
       minTextAdapt: true,
 
-      child: MaterialApp(debugShowCheckedModeBanner: false, home: HomeScreen()),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: LoginScreen(),
+      ),
     );
   }
 }
