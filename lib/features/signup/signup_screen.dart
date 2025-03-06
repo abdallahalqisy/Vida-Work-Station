@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vida/constants/theme.dart';
 import 'package:vida/features/home/home_screen.dart';
+import 'package:vida/features/login/login_screen.dart';
 import 'package:vida/features/login/widget/custom_button.dart';
 import 'package:vida/features/login/widget/custom_text_form_field.dart';
-import 'package:vida/features/signup/signup_screen.dart';
 
-class LoginScreen extends StatelessWidget {
-  LoginScreen({super.key});
+class SignupScreen extends StatelessWidget {
+  SignupScreen({super.key});
 
-  String? email, password;
+  String? name, email, password;
   final formKey = GlobalKey<FormState>();
 
   @override
@@ -37,7 +37,7 @@ class LoginScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 130.h),
                 Text(
-                  'Login to your account',
+                  'Create New account',
                   style: TextStyle(
                     fontSize: 22.sp,
                     fontWeight: FontWeight.bold,
@@ -46,7 +46,23 @@ class LoginScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 50.h),
                 CustomTextFormField(
-                  hintText: 'Test@gmail,com',
+                  labelText: 'Name',
+                  hintText: 'John Doe',
+                  onChanged: (data) {
+                    name = data;
+                  },
+                  textInputAction: TextInputAction.next,
+                  autoValidate: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter your name';
+                    }
+                    return null;
+                  },
+                  icon: Icons.person,
+                ),
+                SizedBox(height: 10.h),
+                CustomTextFormField(
+                  hintText: 'Test@gmail.com',
                   labelText: 'Email',
                   obscureText: false,
                   onChanged: (data) {
@@ -63,7 +79,7 @@ class LoginScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 10.h),
                 CustomTextFormField(
-                  hintText: '********',
+                  hintText: '**********',
                   obscureText: true,
                   labelText: 'Password',
                   onChanged: (data) {
@@ -80,7 +96,7 @@ class LoginScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 30.h),
                 CustomButton(
-                  text: 'Login',
+                  text: 'Sign up',
                   onPressed: () {
                     if (formKey.currentState!.validate()) {
                       Navigator.push(
@@ -114,7 +130,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                     Expanded(
                       child: Divider(
-                        color: const Color(0xff003367),
+                        color: colorScheme.primary,
                         thickness: 1.w,
                         indent: 10.w,
                         endIndent: 20.w,
@@ -124,11 +140,11 @@ class LoginScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 10.h),
                 CustomButton(
-                  text: 'Sign up',
+                  text: 'Login',
                   onPressed: () {
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => SignupScreen()),
+                      MaterialPageRoute(builder: (context) => LoginScreen()),
                     );
                   },
                   textColor: colorScheme.primary,
