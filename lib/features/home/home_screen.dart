@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:vida/features/home/widgets/app_bar_home_screen.dart';
+import 'package:vida/features/home/widgets/custom_list_view.dart';
 import 'package:vida/features/home/widgets/grid_view_home_screen.dart';
-import 'package:vida/features/home/widgets/text_in_home_screen.dart'; // استيراد حزمة url_launcher
+import 'package:vida/features/home/widgets/text_in_home_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -25,16 +26,14 @@ class _HomeScreenState extends State<HomeScreen>
     // تهيئة AnimationController
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 2), // مدة الانيميشن
+      duration: const Duration(seconds: 2),
     );
 
     // تعريف الانيميشن للتكبير
-    _scaleAnimation = Tween<double>(begin: 0.5, end: 1.0).animate(
-      CurvedAnimation(
-        parent: _controller,
-        curve: Curves.easeInOut, // نوع الانيميشن
-      ),
-    );
+    _scaleAnimation = Tween<double>(
+      begin: 0.5,
+      end: 1.0,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
 
     // تعريف الانيميشن للشفافية
     _opacityAnimation = Tween<double>(
@@ -48,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen>
 
   @override
   void dispose() {
-    _controller.dispose(); // التخلص من الـ controller عند إغلاق الصفحة
+    _controller.dispose();
     super.dispose();
   }
 
@@ -80,18 +79,21 @@ class _HomeScreenState extends State<HomeScreen>
                 ),
               ),
               ListTile(
+                leading: const Icon(Icons.home),
                 title: const Text('Home'),
                 onTap: () {
                   Navigator.pop(context);
                 },
               ),
               ListTile(
+                leading: const Icon(Icons.info),
                 title: const Text('About'),
                 onTap: () {
                   Navigator.pop(context);
                 },
               ),
               ListTile(
+                leading: const Icon(Icons.contact_mail),
                 title: const Text('Contact'),
                 onTap: () {
                   Navigator.pop(context);
@@ -105,17 +107,16 @@ class _HomeScreenState extends State<HomeScreen>
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(8.0.w),
                 child: Stack(
                   children: [
                     AnimatedBuilder(
                       animation: _controller,
                       builder: (context, child) {
                         return Opacity(
-                          opacity:
-                              _opacityAnimation.value, // التحكم في الشفافية
+                          opacity: _opacityAnimation.value,
                           child: Transform.scale(
-                            scale: _scaleAnimation.value, // التحكم في الحجم
+                            scale: _scaleAnimation.value,
                             child: Image.asset(
                               'assets/images/youtube_banner.png',
                               fit: BoxFit.cover,
@@ -128,10 +129,10 @@ class _HomeScreenState extends State<HomeScreen>
                       top: 60.h,
                       left: 155.w,
                       child: CircleAvatar(
-                        radius: 35,
+                        radius: 35.r,
                         backgroundColor: Colors.blue.withOpacity(0.5),
                         child: IconButton(
-                          onPressed: _launchVideo, // استدعاء الدالة عند الضغط
+                          onPressed: _launchVideo,
                           icon: const Icon(
                             Icons.play_arrow,
                             color: Colors.white,
@@ -144,23 +145,29 @@ class _HomeScreenState extends State<HomeScreen>
                 ),
               ),
               SizedBox(height: 20.h),
-              TextInHomeScreen(),
+              const TextInHomeScreen(),
               GridViewInHomeScreen(),
-              ListTile(
-                title: const Text(
-                  textDirection: TextDirection.rtl,
-                  'احجز الان معنا اونلاين',
-                  style: TextStyle(
-                    color: Color(0xff003367),
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                child: ListTile(
+                  title: const Text(
+                    'احجز الان معنا اونلاين',
+                    textDirection: TextDirection.rtl,
+                    style: TextStyle(
+                      color: Color(0xff003367),
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  subtitle: const Text(
+                    'يمكنك الان الحجز من خلال الموقع الالكتروني ما عليك سوى اختيار القاعة التى تريد الحجز بها وتحديد معاد الحجز وارسال الطلب الينا وسوف نقوم فورا بتاكيد الحجز الخاص بك',
+                    textDirection: TextDirection.rtl,
                   ),
                 ),
-                subtitle: const Text(
-                  'يمكنك الان الحجز من خلال الموقع الالكتروني ما عليك سوى اختيار القاعة التى تريد الحجز بها وتحديد معاد الحجز وارسال الطلب الينا وسوف نقوم فورا بتاكيد الحجز الخاص بك',
-                  textDirection: TextDirection.rtl,
-                ),
               ),
+              SizedBox(height: 20.h),
+              SizedBox(height: 250.h, child: CustomListView()),
+              SizedBox(height: 10.h),
             ],
           ),
         ),
