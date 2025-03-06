@@ -82,12 +82,12 @@ class LoginScreen extends StatelessWidget {
                 CustomButton(
                   text: 'Login',
                   onPressed: () {
-                    if (formKey.currentState!.validate()) {
+                    // if (formKey.currentState!.validate()) {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => HomeScreen()),
                       );
-                    }
+                    // }
                   },
                   textColor: colorScheme.shadow,
                   buttonColor: colorScheme.primary,

@@ -66,12 +66,12 @@ class CustomListView extends StatelessWidget {
                     style: TextStyle(color: Colors.grey, fontSize: 12.sp),
                   ),
                 ),
-                CustomButton(
-                  color: const Color(0xff39A0BD),
-                  minWidth: 100,
-                  text: 'احجز الان',
-                  onPressed: () {},
-                ),
+                // CustomButton(
+                //   color: const Color(0xff39A0BD),
+                //   minWidth: 100,
+                //   text: 'احجز الان',
+                //   onPressed: () {}, textColor: null, buttonColor: null,
+                // ),
               ],
             ),
           ),

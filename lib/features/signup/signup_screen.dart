@@ -98,12 +98,12 @@ class SignupScreen extends StatelessWidget {
                 CustomButton(
                   text: 'Sign up',
                   onPressed: () {
-                    if (formKey.currentState!.validate()) {
+                    // if (formKey.currentState!.validate()) {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => HomeScreen()),
                       );
-                    }
+                    // }
                   },
                   textColor: colorScheme.shadow,
                   buttonColor: colorScheme.primary,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:vida/constants/theme.dart';
+
 
 class CustomButton extends StatelessWidget {
   const CustomButton({
