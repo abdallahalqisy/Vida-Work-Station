@@ -10,7 +10,7 @@ class CustomTextFormField extends StatefulWidget {
     required this.hintText,
     required this.onChanged,
     required this.textInputAction,
-    required this.autoValidate,
+    required this.validator,
     required this.icon,
   });
 
@@ -18,10 +18,8 @@ class CustomTextFormField extends StatefulWidget {
   final String hintText;
   final bool obscureText;
   final void Function(String)? onChanged;
-
   final TextInputAction textInputAction;
-
-  final String? Function(String?)? autoValidate;
+  final String? Function(String?)? validator;
   final IconData? icon;
 
   @override
@@ -30,6 +28,7 @@ class CustomTextFormField extends StatefulWidget {
 
 class _CustomTextFormFieldState extends State<CustomTextFormField> {
   bool _obscureText = true;
+  final GlobalKey<FormFieldState> fieldKey = GlobalKey<FormFieldState>();
 
   @override
   void initState() {
@@ -42,12 +41,17 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 10.w),
       child: TextFormField(
+        key: fieldKey,
         obscuringCharacter: '*',
         keyboardType: TextInputType.text,
-        onChanged: widget.onChanged,
+        onChanged: (value) {
+          widget.onChanged?.call(value);
+          fieldKey.currentState?.validate();
+        },
         obscureText: _obscureText,
         textInputAction: widget.textInputAction,
-
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        validator: widget.validator,
         decoration: InputDecoration(
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30.r),
@@ -77,7 +81,6 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                   : null,
           prefixIcon: Icon(widget.icon, color: colorScheme.primary),
         ),
-        validator: widget.autoValidate,
       ),
     );
   }

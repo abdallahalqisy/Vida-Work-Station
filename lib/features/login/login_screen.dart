@@ -41,21 +41,25 @@ class LoginScreen extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 22.sp,
                     fontWeight: FontWeight.bold,
-                    color: const Color(0xff003367),
+                    color: colorScheme.primary,
                   ),
                 ),
                 SizedBox(height: 50.h),
                 CustomTextFormField(
-                  hintText: 'Test@gmail,com',
+                  hintText: 'Test@gmail.com',
                   labelText: 'Email',
                   obscureText: false,
                   onChanged: (data) {
                     email = data;
                   },
                   textInputAction: TextInputAction.next,
-                  autoValidate: (value) {
-                    if (value!.isEmpty) {
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
                       return 'Please enter your email';
+                    } else if (!RegExp(
+                      r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$",
+                    ).hasMatch(value)) {
+                      return 'Enter a valid email address';
                     }
                     return null;
                   },
@@ -63,16 +67,18 @@ class LoginScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 10.h),
                 CustomTextFormField(
-                  hintText: '********',
+                  hintText: '**********',
                   obscureText: true,
                   labelText: 'Password',
                   onChanged: (data) {
                     password = data;
                   },
                   textInputAction: TextInputAction.done,
-                  autoValidate: (value) {
-                    if (value!.isEmpty) {
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
                       return 'Please enter your password';
+                    } else if (value.length < 6) {
+                      return 'Password must be at least 6 characters';
                     }
                     return null;
                   },
@@ -82,12 +88,12 @@ class LoginScreen extends StatelessWidget {
                 CustomButton(
                   text: 'Login',
                   onPressed: () {
-                    // if (formKey.currentState!.validate()) {
+                    if (formKey.currentState!.validate()) {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => HomeScreen()),
                       );
-                    // }
+                    }
                   },
                   textColor: colorScheme.shadow,
                   buttonColor: colorScheme.primary,
@@ -109,12 +115,12 @@ class LoginScreen extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 15.sp,
                         fontWeight: FontWeight.bold,
-                        color: const Color(0xff003367),
+                        color: colorScheme.primary,
                       ),
                     ),
                     Expanded(
                       child: Divider(
-                        color: const Color(0xff003367),
+                        color: colorScheme.primary,
                         thickness: 1.w,
                         indent: 10.w,
                         endIndent: 20.w,

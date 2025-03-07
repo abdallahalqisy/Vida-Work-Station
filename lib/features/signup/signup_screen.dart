@@ -41,7 +41,7 @@ class SignupScreen extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 22.sp,
                     fontWeight: FontWeight.bold,
-                    color: const Color(0xff003367),
+                    color: colorScheme.primary,
                   ),
                 ),
                 SizedBox(height: 50.h),
@@ -52,7 +52,7 @@ class SignupScreen extends StatelessWidget {
                     name = data;
                   },
                   textInputAction: TextInputAction.next,
-                  autoValidate: (value) {
+                  validator: (value) {
                     if (value!.isEmpty) {
                       return 'Please enter your name';
                     }
@@ -69,9 +69,13 @@ class SignupScreen extends StatelessWidget {
                     email = data;
                   },
                   textInputAction: TextInputAction.next,
-                  autoValidate: (value) {
-                    if (value!.isEmpty) {
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
                       return 'Please enter your email';
+                    } else if (!RegExp(
+                      r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$",
+                    ).hasMatch(value)) {
+                      return 'Enter a valid email address';
                     }
                     return null;
                   },
@@ -86,9 +90,11 @@ class SignupScreen extends StatelessWidget {
                     password = data;
                   },
                   textInputAction: TextInputAction.done,
-                  autoValidate: (value) {
-                    if (value!.isEmpty) {
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
                       return 'Please enter your password';
+                    } else if (value.length < 6) {
+                      return 'Password must be at least 6 characters';
                     }
                     return null;
                   },
@@ -98,12 +104,12 @@ class SignupScreen extends StatelessWidget {
                 CustomButton(
                   text: 'Sign up',
                   onPressed: () {
-                    // if (formKey.currentState!.validate()) {
+                    if (formKey.currentState!.validate()) {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => HomeScreen()),
                       );
-                    // }
+                    }
                   },
                   textColor: colorScheme.shadow,
                   buttonColor: colorScheme.primary,
@@ -125,7 +131,7 @@ class SignupScreen extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 15.sp,
                         fontWeight: FontWeight.bold,
-                        color: const Color(0xff003367),
+                        color: colorScheme.primary,
                       ),
                     ),
                     Expanded(
