@@ -17,7 +17,7 @@ class SignupScreen extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
-          child: signupForm(),
+          child: SignupForm(),
         ),
       ),
     );

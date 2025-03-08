@@ -6,10 +6,16 @@ import 'package:vida/ui/components/common/button/custom_button.dart';
 import 'package:vida/ui/components/common/text_form_field/custom_text_form_field.dart';
 import 'package:vida/ui/screens/onboarding/login_screen.dart';
 
-class signupForm extends StatelessWidget {
-  signupForm({super.key});
-  String? name, email, password;
+class SignupForm extends StatefulWidget {
+  const SignupForm({super.key});
+
+  @override
+  _SignupFormState createState() => _SignupFormState();
+}
+
+class _SignupFormState extends State<SignupForm> {
   final formKey = GlobalKey<FormState>();
+  String? name, email, password;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +39,9 @@ class signupForm extends StatelessWidget {
             labelText: 'Name',
             hintText: 'John Doe',
             onChanged: (data) {
-              name = data;
+              setState(() {
+                name = data;
+              });
             },
             textInputAction: TextInputAction.next,
             validator: (value) {
@@ -50,7 +58,9 @@ class signupForm extends StatelessWidget {
             labelText: 'Email',
             obscureText: false,
             onChanged: (data) {
-              email = data;
+              setState(() {
+                email = data;
+              });
             },
             textInputAction: TextInputAction.next,
             validator: (value) {
@@ -71,7 +81,9 @@ class signupForm extends StatelessWidget {
             obscureText: true,
             labelText: 'Password',
             onChanged: (data) {
-              password = data;
+              setState(() {
+                password = data;
+              });
             },
             textInputAction: TextInputAction.done,
             validator: (value) {
