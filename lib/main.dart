@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vida/constants/theme.dart';
 import 'package:vida/features/home/home_screen.dart';
 import 'package:vida/features/login/login_screen.dart';
-import 'package:vida/features/signup/signup_screen.dart';
 
 void main() {
   runApp(const VidaApp());
@@ -20,9 +19,8 @@ class VidaApp extends StatelessWidget {
       minTextAdapt: true,
 
       child: MaterialApp(
-        theme: ThemeData(colorScheme: colorScheme, useMaterial3: true),
         debugShowCheckedModeBanner: false,
-        home: SignupScreen(),
+        home: LoginScreen(),
       ),
     );
   }

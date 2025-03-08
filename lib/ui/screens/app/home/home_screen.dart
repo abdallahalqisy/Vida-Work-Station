@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:url_launcher/url_launcher.dart'; // استيراد حزمة url_launcher
-import 'package:vida/features/home/widgets/app_bar_home_screen.dart';
-import 'package:vida/features/home/widgets/text_in_home_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:vida/ui/screens/app/home/widgets/app_bar_home_screen.dart';
 import 'package:vida/ui/screens/app/home/widgets/custom_list_view.dart';
-import 'package:vida/ui/screens/app/home/widgets/grid_view_home_screen.dart'; // استيراد حزمة url_launcher
+import 'package:vida/ui/screens/app/home/widgets/grid_view_home_screen.dart';
+import 'package:vida/ui/screens/app/home/widgets/text_in_home_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
