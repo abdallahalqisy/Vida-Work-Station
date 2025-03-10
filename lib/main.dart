@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:vida/features/home/home_screen.dart';
+import 'package:vida/ui/screens/app/home/home_screen.dart';
 
 void main() {
   runApp(const VidaApp());
