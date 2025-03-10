@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:vida/ui/components/common/home/home_drawer.dart';
 import 'package:vida/ui/screens/app/home/widgets/app_bar_home_screen.dart';
 import 'package:vida/ui/screens/app/home/widgets/custom_list_view.dart';
 import 'package:vida/ui/screens/app/home/widgets/grid_view_home_screen.dart';
@@ -66,42 +67,7 @@ class _HomeScreenState extends State<HomeScreen>
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        drawer: Drawer(
-          backgroundColor: Colors.white,
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: <Widget>[
-              const DrawerHeader(
-                decoration: BoxDecoration(color: Colors.white),
-                child: Text(
-                  'Vida Work Station',
-                  style: TextStyle(color: Colors.black, fontSize: 18),
-                ),
-              ),
-              ListTile(
-                leading: const Icon(Icons.home),
-                title: const Text('Home'),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.info),
-                title: const Text('About'),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.contact_mail),
-                title: const Text('Contact'),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ],
-          ),
-        ),
+        drawer: HomeDrawer(),
         appBar: const AppBarHomeScreen(),
         body: SingleChildScrollView(
           child: Column(

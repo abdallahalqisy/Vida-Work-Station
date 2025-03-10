@@ -1,7 +1,10 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:vida/constants/theme.dart';
+import 'package:vida/ui/screens/app/coming_events/coming_events.dart';
+import 'package:vida/ui/screens/app/courses/courses.dart';
+import 'package:vida/ui/screens/app/meeting_rooms/meeting_rooms.dart';
+import 'package:vida/ui/screens/app/training_rooms/training_rooms.dart';
 
 class GridViewInHomeScreen extends StatelessWidget {
   GridViewInHomeScreen({super.key});
@@ -12,11 +15,18 @@ class GridViewInHomeScreen extends StatelessWidget {
     'assets/images/قاعه الاجتماعات.jpeg',
     'assets/images/courses.jpg',
   ];
-  final List<String> titel = [
+  final List<String> title = [
     'Coming events',
     'قاعات التدريب',
     'قاعات الاجتماعات',
     'courses',
+  ];
+
+  final List<Widget> pages = [
+    const ComingEvents(),
+    const TrainingRooms(),
+    const MeetingRooms(),
+    const Courses(),
   ];
 
   @override
@@ -29,7 +39,8 @@ class GridViewInHomeScreen extends StatelessWidget {
         crossAxisSpacing: 10.0,
         mainAxisSpacing: 10.0,
       ),
-      itemCount: titel.length, // Number of items
+      itemCount: title.length,
+      // Number of items
       shrinkWrap: true,
       itemBuilder: (context, index) {
         return Container(
@@ -49,12 +60,20 @@ class GridViewInHomeScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(images[index % 4], width: 100.w, height: 100.h),
-              Text(
-                titel[index % 4],
-                style: TextStyle(
-                  color: Color(0xff003367),
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => pages[index % 4]),
+                  );
+                },
+                child: Text(
+                  title[index % 4],
+                  style: TextStyle(
+                    color: colorScheme.primary,
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ],
