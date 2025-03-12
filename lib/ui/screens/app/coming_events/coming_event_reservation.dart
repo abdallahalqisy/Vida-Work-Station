@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vida/constants/theme.dart';
 import 'package:vida/ui/components/common/body/container_body_reservation.dart';
+import 'package:vida/ui/components/common/body/custom_tab_bar.dart';
 import 'package:vida/ui/components/common/coming_event/event_info.dart';
 import 'package:vida/ui/components/common/coming_event/event_reservation.dart';
 
@@ -54,59 +55,12 @@ class ComingEventReservation extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: DefaultTabController(
-                  length: 3,
-                  initialIndex: 1,
-                  child: Column(
-                    children: [
-                      TabBar(
-                        indicatorWeight: 5,
-                        indicatorSize: TabBarIndicatorSize.tab,
-
-                        indicatorColor: colorScheme.surface,
-                        labelColor: colorScheme.surface,
-                        unselectedLabelColor: colorScheme.primary,
-                        tabs: const <Widget>[
-                          Tab(
-                            child: Text(
-                              'تقييم',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 24,
-                              ),
-                            ),
-                          ),
-                          Tab(
-                            child: Text(
-                              'احجز الان',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 24,
-                              ),
-                            ),
-                          ),
-                          Tab(
-                            child: Text(
-                              'معلومات',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 24,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Expanded(
-                        child: TabBarView(
-                          children: <Widget>[
-                            EventReservation(),
-                            EventReservation(),
-                            EventInfo(),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
+                child: CustomTabBar(
+                  tabBarViews: [
+                    EventReservation(),
+                    EventReservation(),
+                    EventInfo(),
+                  ],
                 ),
               ),
             ),
