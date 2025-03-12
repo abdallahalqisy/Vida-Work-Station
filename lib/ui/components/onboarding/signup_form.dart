@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vida/constants/theme.dart';
 import 'package:vida/ui/screens/app/home/home_screen.dart';
-import 'package:vida/ui/components/common/button/custom_button.dart';
-import 'package:vida/ui/components/common/text_form_field/custom_text_form_field.dart';
+import 'package:vida/ui/components/common/buttons/custom_button_authentication.dart';
+import 'package:vida/ui/components/common/text_form_field/custom_text_form_field_auth.dart';
 import 'package:vida/ui/screens/onboarding/login_screen.dart';
 
 class signupForm extends StatelessWidget {

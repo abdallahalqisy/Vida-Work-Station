@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class CustomDrawer extends StatelessWidget {
-  const CustomDrawer({super.key});
+class HomeDrawer extends StatelessWidget {
+  const HomeDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,35 +12,28 @@ class CustomDrawer extends StatelessWidget {
         children: <Widget>[
           const DrawerHeader(
             decoration: BoxDecoration(color: Colors.white),
-            child: Column(
-              children: [
-                SizedBox(height: 10),
-                CircleAvatar(radius: 25, child: Icon(Icons.person)),
-                SizedBox(height: 10),
-                Text(
-                  'اسم المستخدم',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
-                ),
-              ],
+            child: Text(
+              'Vida Work Station',
+              style: TextStyle(color: Colors.black, fontSize: 18),
             ),
           ),
           ListTile(
             leading: const Icon(Icons.home),
-            title: const Text('الرئيسيه'),
+            title: const Text('Home'),
             onTap: () {
               Navigator.pop(context);
             },
           ),
           ListTile(
-            leading: const Icon(Icons.article),
-            title: const Text('الاخبار'),
+            leading: const Icon(Icons.info),
+            title: const Text('About'),
             onTap: () {
               Navigator.pop(context);
             },
           ),
           ListTile(
-            // leading: const Icon(Icons.confirmation_number),
-            title: const Text('قاعات الاجتماعات'),
+            leading: const Icon(Icons.contact_mail),
+            title: const Text('Contact'),
             onTap: () {
               Navigator.pop(context);
             },

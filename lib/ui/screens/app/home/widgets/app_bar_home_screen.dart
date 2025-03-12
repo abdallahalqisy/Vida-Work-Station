@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:vida/features/customer_servise/customer_service_screen.dart';
+import 'package:vida/constants/theme.dart';
+import 'package:vida/features/customer_services/customer_service_screen.dart';
 
 class AppBarHomeScreen extends StatelessWidget implements PreferredSizeWidget {
   // Implement PreferredSizeWidget
@@ -24,7 +25,7 @@ class AppBarHomeScreen extends StatelessWidget implements PreferredSizeWidget {
       ],
 
       centerTitle: true,
-      backgroundColor: const Color(0xff39A0BD),
+      backgroundColor: colorScheme.surface,
       title: Image.asset('assets/images/logo.png', height: 30),
     );
   }

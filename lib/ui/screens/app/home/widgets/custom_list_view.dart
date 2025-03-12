@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:vida/constants/theme.dart';
+import 'package:vida/ui/components/common/buttons/custom_button_reservation.dart';
 
 class CustomListView extends StatelessWidget {
   CustomListView({super.key});
+
   final List<String> images = [
     'assets/images/work_brain.jpg',
     'assets/images/vip.jpg',
@@ -15,18 +18,19 @@ class CustomListView extends StatelessWidget {
     'قاعات تدريبات مجهزه',
     'قاعات مخصصه للتدريب',
   ];
-  final List<String> titel = [
+  final List<String> title = [
     'Work Brain',
     'Vip Venue',
     'Grow Venue',
-    'Speakmuch',
+    'Speak much',
   ];
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       shrinkWrap: true,
       scrollDirection: Axis.horizontal,
-      itemCount: titel.length,
+      itemCount: title.length,
       itemBuilder: (context, index) {
         return Padding(
           padding: const EdgeInsets.only(bottom: 10.0),
@@ -52,9 +56,9 @@ class CustomListView extends StatelessWidget {
                 SizedBox(height: 8.h),
                 ListTile(
                   title: Text(
-                    titel[index % 4],
+                    title[index % 4],
                     style: TextStyle(
-                      color: Color(0xff003367),
+                      color: colorScheme.primary,
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
                     ),
@@ -65,12 +69,14 @@ class CustomListView extends StatelessWidget {
                     style: TextStyle(color: Colors.grey, fontSize: 12.sp),
                   ),
                 ),
-                // CustomButton(
-                //   color: const Color(0xff39A0BD),
-                //   minWidth: 100,
-                //   text: 'احجز الان',
-                //   onPressed: () {}, textColor: null, buttonColor: null,
-                // ),
+                CustomButton(
+                  color: colorScheme.surface,
+                  minWidth: 100,
+                  text: 'احجز الان',
+                  onPressed: () {},
+                  textColor: colorScheme.shadow,
+                  borderColor: colorScheme.surface,
+                ),
               ],
             ),
           ),
