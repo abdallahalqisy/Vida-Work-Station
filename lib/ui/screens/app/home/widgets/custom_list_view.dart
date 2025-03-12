@@ -74,6 +74,8 @@ class CustomListView extends StatelessWidget {
                   minWidth: 100,
                   text: 'احجز الان',
                   onPressed: () {},
+                  textColor: colorScheme.shadow,
+                  borderColor: colorScheme.surface,
                 ),
               ],
             ),

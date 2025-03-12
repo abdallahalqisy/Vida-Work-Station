@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vida/constants/theme.dart';
 import 'package:vida/ui/components/common/body/container_body.dart';
-import 'package:vida/ui/components/common/coming_event/coming_event_reservation.dart';
+import 'package:vida/ui/screens/app/coming_events/coming_event_reservation.dart';
 
 class ComingEvents extends StatelessWidget {
   const ComingEvents({super.key});

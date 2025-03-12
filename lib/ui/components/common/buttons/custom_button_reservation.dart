@@ -8,34 +8,37 @@ class CustomButton extends StatelessWidget {
     required this.onPressed,
     required this.minWidth,
     required this.color,
+    required this.textColor,
+    required this.borderColor,
   });
 
   final String text;
   final int minWidth;
   final Color color;
   final void Function() onPressed;
+  final Color textColor;
+
+  final Color borderColor;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(left: 12.0.w),
-      child: Align(
-        alignment: Alignment.bottomLeft,
-        child: MaterialButton(
-          minWidth: minWidth.w,
+      child: MaterialButton(
+        minWidth: minWidth.w,
 
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30.r),
-          ),
-          onPressed: onPressed,
-          color: color,
-          child: Text(
-            text,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 15.sp,
-              fontWeight: FontWeight.w900,
-            ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30.r),
+          side: BorderSide(color: borderColor, width: 1.w),
+        ),
+        onPressed: onPressed,
+        color: color,
+        child: Text(
+          text,
+          style: TextStyle(
+            color: textColor,
+            fontSize: 15.sp,
+            fontWeight: FontWeight.w900,
           ),
         ),
       ),

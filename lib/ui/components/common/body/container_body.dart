@@ -130,16 +130,13 @@ class ContainerBody extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 3),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CustomButton(
-                  minWidth: 100,
-                  text: 'احجز الان ',
-                  color: colorScheme.surface,
-                  onPressed: onPressed,
-                ),
-              ],
+            CustomButton(
+              minWidth: 100,
+              text: 'احجز الان ',
+              color: colorScheme.surface,
+              onPressed: onPressed,
+              textColor: colorScheme.shadow,
+              borderColor: colorScheme.surface,
             ),
           ],
         ),
