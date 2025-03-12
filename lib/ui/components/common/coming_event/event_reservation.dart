@@ -43,7 +43,7 @@ class EventReservation extends StatelessWidget {
 
             TextFormFieldReservation(
               hintText: 'البريد الالكتروني',
-              direction1: TextDirection.rtl,
+              direction1: TextDirection.ltr,
               direction2: TextDirection.ltr,
               controller: emailController,
               maxLines: 1,

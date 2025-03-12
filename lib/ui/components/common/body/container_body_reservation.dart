@@ -15,13 +15,10 @@ class ContainerBodyReservation extends StatelessWidget {
   });
 
   final String title;
-
   final String subTitle;
   final String description;
-
   final int number;
   final String image;
-
   final String details;
 
   @override
