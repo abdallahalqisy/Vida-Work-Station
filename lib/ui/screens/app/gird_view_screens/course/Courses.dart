@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vida/constants/theme.dart';
-import 'package:vida/ui/screens/app/gird%20view%20screens/course/courses/business.dart';
-import 'package:vida/ui/screens/app/gird%20view%20screens/course/courses/coding.dart';
-import 'package:vida/ui/screens/app/gird%20view%20screens/course/courses/english.dart';
-import 'package:vida/ui/screens/app/gird%20view%20screens/course/courses/graphics.dart';
-import 'package:vida/ui/screens/app/gird%20view%20screens/course/courses/media.dart';
-import 'package:vida/ui/screens/app/gird%20view%20screens/course/courses/soft%20skills.dart';
+import 'package:vida/ui/screens/app/gird_view_screens/course/courses/business.dart';
+import 'package:vida/ui/screens/app/gird_view_screens/course/courses/coding.dart';
+import 'package:vida/ui/screens/app/gird_view_screens/course/courses/english.dart';
+import 'package:vida/ui/screens/app/gird_view_screens/course/courses/graphics.dart';
+import 'package:vida/ui/screens/app/gird_view_screens/course/courses/media.dart';
+import 'package:vida/ui/screens/app/gird_view_screens/course/courses/soft%20skills.dart';
 
 class Courses extends StatelessWidget {
   Courses({super.key});

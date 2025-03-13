@@ -3,12 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vida/constants/theme.dart';
 import 'package:vida/ui/components/common/body/container_body_reservation.dart';
 import 'package:vida/ui/components/common/body/custom_tab_bar.dart';
-import 'package:vida/ui/screens/app/gird%20view%20screens/info%20category.dart';
 import 'package:vida/ui/components/common/coming_event/event_info.dart';
 import 'package:vida/ui/components/common/coming_event/event_reservation.dart';
+import 'package:vida/ui/screens/app/gird_view_screens/info_category.dart';
 
-class Reservationbuilder extends StatelessWidget {
-  const Reservationbuilder({super.key, required this.info});
+class ReservationBuilder extends StatelessWidget {
+  const ReservationBuilder({super.key, required this.info});
   final InfoCategory info;
   @override
   Widget build(BuildContext context) {

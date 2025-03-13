@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:vida/ui/screens/app/gird%20view%20screens/info%20category.dart';
-import 'package:vida/ui/screens/app/gird%20view%20screens/ListViewBuilder.dart';
+import 'package:vida/ui/screens/app/gird_view_screens/ListViewBuilder.dart';
+import 'package:vida/ui/screens/app/gird_view_screens/info_category.dart';
 
 class TrainingRooms extends StatelessWidget {
   const TrainingRooms({super.key});
@@ -28,6 +28,6 @@ class TrainingRooms extends StatelessWidget {
   //make info scroll
   @override
   Widget build(BuildContext context) {
-    return Listviewbuilder(infoList: infoList);
+    return ListViewBuilder(infoList: infoList);
   }
 }

@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vida/constants/theme.dart';
 import 'package:vida/ui/components/common/body/container_body.dart';
-import 'package:vida/ui/screens/app/gird%20view%20screens/info%20category.dart';
-import 'package:vida/ui/screens/app/gird%20view%20screens/ReservationBuilder.dart';
+import 'package:vida/ui/screens/app/gird_view_screens/ReservationBuilder.dart';
+import 'package:vida/ui/screens/app/gird_view_screens/info_category.dart';
 
-class Listviewbuilder extends StatelessWidget {
-  const Listviewbuilder({super.key, required this.infoList});
+class ListViewBuilder extends StatelessWidget {
+  const ListViewBuilder({super.key, required this.infoList});
+
   // make title here
 
-  final List<InfoCategory> infoList ;
+  final List<InfoCategory> infoList;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +45,7 @@ class Listviewbuilder extends StatelessWidget {
                 return Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => Reservationbuilder(info: info),
+                    builder: (context) => ReservationBuilder(info: info),
                   ),
                 );
               },
