@@ -27,7 +27,7 @@ class ContainerBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 220.w,
-      height: 390.h,
+      height: 400.h,
       decoration: BoxDecoration(
         color: colorScheme.shadow,
         borderRadius: BorderRadius.circular(20.r),

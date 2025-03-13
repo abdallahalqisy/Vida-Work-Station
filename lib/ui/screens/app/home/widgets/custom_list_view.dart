@@ -7,7 +7,7 @@ class CustomListView extends StatelessWidget {
   CustomListView({super.key});
 
   final List<String> images = [
-    'assets/images/work_brain.jpg',
+    'assets/images/woke_brain.jpg',
     'assets/images/vip.jpg',
     'assets/images/grow.jpg',
     'assets/images/speak.jpg',

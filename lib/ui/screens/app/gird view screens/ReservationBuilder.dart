@@ -3,12 +3,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vida/constants/theme.dart';
 import 'package:vida/ui/components/common/body/container_body_reservation.dart';
 import 'package:vida/ui/components/common/body/custom_tab_bar.dart';
+import 'package:vida/ui/screens/app/gird%20view%20screens/info%20category.dart';
 import 'package:vida/ui/components/common/coming_event/event_info.dart';
 import 'package:vida/ui/components/common/coming_event/event_reservation.dart';
 
-class ComingEventReservation extends StatelessWidget {
-  const ComingEventReservation({super.key});
-
+class Reservationbuilder extends StatelessWidget {
+  const Reservationbuilder({super.key, required this.info});
+  final InfoCategory info;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,11 +30,11 @@ class ComingEventReservation extends StatelessWidget {
         child: Column(
           children: [
             ContainerBodyReservation(
-              title: 'Coming events',
-              subTitle: 'الرواق الفلسفى ',
-              description: 'Friday ,22 September',
-              number: 4,
-              image: 'assets/images/coming_event_body.jpg',
+              title: info.title,
+              subTitle: info.description,
+              description: info.description2,
+              number: info.number,
+              image: info.image,
               details: 'غير متاحه للحجز',
             ),
             const SizedBox(height: 20),

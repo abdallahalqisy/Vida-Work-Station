@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vida/constants/theme.dart';
-import 'package:vida/ui/screens/app/coming_events/coming_events.dart';
-import 'package:vida/ui/screens/app/courses/courses.dart';
-import 'package:vida/ui/screens/app/meeting_rooms/meeting_rooms.dart';
-import 'package:vida/ui/screens/app/training_rooms/training_rooms.dart';
+import 'package:vida/ui/screens/app/gird%20view%20screens/coming_events/coming_events.dart';
+import 'package:vida/ui/screens/app/gird%20view%20screens/course/Courses.dart';
+import 'package:vida/ui/screens/app/gird%20view%20screens/meeting_rooms/meeting_rooms.dart';
+import 'package:vida/ui/screens/app/gird%20view%20screens/training_rooms/training_rooms.dart';
 
 class GridViewInHomeScreen extends StatelessWidget {
   GridViewInHomeScreen({super.key});
@@ -26,7 +26,7 @@ class GridViewInHomeScreen extends StatelessWidget {
     const ComingEvents(),
     const TrainingRooms(),
     const MeetingRooms(),
-    const Courses(),
+     Courses(),
   ];
 
   @override
