@@ -54,19 +54,21 @@ class CustomListView extends StatelessWidget {
               children: [
                 Image.asset(images[index], width: 100.w, height: 80.h),
                 SizedBox(height: 8.h),
-                ListTile(
-                  title: Text(
-                    title[index % 4],
-                    style: TextStyle(
-                      color: colorScheme.primary,
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
+                Expanded(
+                  child: ListTile(
+                    title: Text(
+                      title[index % 4],
+                      style: TextStyle(
+                        color: colorScheme.primary,
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  subtitle: Text(
-                    overflow: TextOverflow.ellipsis,
-                    subtitle[index],
-                    style: TextStyle(color: Colors.grey, fontSize: 12.sp),
+                    subtitle: Text(
+                      overflow: TextOverflow.ellipsis,
+                      subtitle[index],
+                      style: TextStyle(color: Colors.grey, fontSize: 12.sp),
+                    ),
                   ),
                 ),
                 CustomButton(

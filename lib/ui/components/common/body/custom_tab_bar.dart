@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vida/constants/theme.dart';
 
 class CustomTabBar extends StatelessWidget {
@@ -41,7 +42,12 @@ class CustomTabBar extends StatelessWidget {
               ),
             ],
           ),
-          Expanded(child: TabBarView(children: tabBarViews)),
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.only(top: 8.h),
+              child: TabBarView(children: tabBarViews),
+            ),
+          ),
         ],
       ),
     );

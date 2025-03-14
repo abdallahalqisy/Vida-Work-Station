@@ -61,20 +61,16 @@ class EventInfo extends StatelessWidget {
       children: [
         Icon(icon, size: 20, color: color),
         SizedBox(width: 8),
-        Text(
-          text,
-          style: TextStyle(fontSize: 16),
-          textDirection: TextDirection.rtl,
+        Flexible(
+          child: Text(
+            text,
+            style: TextStyle(fontSize: 16),
+            textDirection: TextDirection.rtl,
+            overflow: TextOverflow.visible,
+            softWrap: true,
+          ),
         ),
       ],
-    );
-  }
-
-  Widget _buildText(String text) {
-    return Text(
-      text,
-      style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-      textAlign: TextAlign.right,
     );
   }
 
@@ -86,13 +82,26 @@ class EventInfo extends StatelessWidget {
         children: [
           Icon(Icons.circle, size: 8, color: Colors.yellow),
           SizedBox(width: 8),
-          Text(
-            text,
-            style: TextStyle(fontSize: 16),
-            textDirection: TextDirection.rtl,
+          Flexible(
+            // Prevents overflow
+            child: Text(
+              text,
+              style: TextStyle(fontSize: 16),
+              textDirection: TextDirection.rtl,
+              overflow: TextOverflow.visible,
+              softWrap: true,
+            ),
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildText(String text) {
+    return Text(
+      text,
+      style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+      textAlign: TextAlign.right,
     );
   }
 }

@@ -23,11 +23,12 @@ class ContainerBodyReservation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final heightContainer = MediaQuery.of(context).size.height;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
       child: Container(
         width: double.infinity,
-        height: 180.h,
+        height: heightContainer * 0.28,
         decoration: BoxDecoration(
           color: colorScheme.shadow,
           borderRadius: BorderRadius.circular(20.r),

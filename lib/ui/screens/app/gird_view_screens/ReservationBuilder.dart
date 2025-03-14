@@ -9,9 +9,12 @@ import 'package:vida/ui/screens/app/gird_view_screens/info_category.dart';
 
 class ReservationBuilder extends StatelessWidget {
   const ReservationBuilder({super.key, required this.info});
+
   final InfoCategory info;
+
   @override
   Widget build(BuildContext context) {
+    final heightContainer = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: colorScheme.surface,
@@ -42,7 +45,10 @@ class ReservationBuilder extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 8.w),
               child: Container(
-                constraints: BoxConstraints(minHeight: 400.h, maxHeight: 460.h),
+                constraints: BoxConstraints(
+                  minHeight: heightContainer * 0.3,
+                  maxHeight: heightContainer * 0.85,
+                ),
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: colorScheme.shadow,

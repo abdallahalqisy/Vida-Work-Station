@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vida/constants/theme.dart';
 import 'package:vida/ui/components/common/buttons/custom_button_reservation.dart';
 import 'package:vida/ui/components/common/text_form_field/text_form_field_reservation.dart';
+import 'package:vida/ui/components/common/time_reservation.dart';
 
 class EventReservation extends StatelessWidget {
   EventReservation({super.key});
@@ -22,6 +23,8 @@ class EventReservation extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
+            BookingScreen(),
+            const SizedBox(height: 20),
             TextFormFieldReservation(
               hintText: 'الاسم بالكامل',
               direction1: TextDirection.rtl,
@@ -30,7 +33,7 @@ class EventReservation extends StatelessWidget {
               maxLines: 1,
               keyboardType: TextInputType.name,
               width: 230,
-              height: 100,
+              height: 80,
               textInputAction: TextInputAction.next,
               validator: (value) {
                 if (value!.isEmpty) {
@@ -49,7 +52,7 @@ class EventReservation extends StatelessWidget {
               maxLines: 1,
               keyboardType: TextInputType.emailAddress,
               width: 390,
-              height: 100,
+              height: 80,
               textInputAction: TextInputAction.next,
               validator: (value) {
                 if (value == null || value.isEmpty) {
@@ -71,7 +74,7 @@ class EventReservation extends StatelessWidget {
               maxLines: 1,
               keyboardType: TextInputType.number,
               width: 390,
-              height: 100,
+              height: 80,
               textInputAction: TextInputAction.next,
               validator: (value) {
                 if (value == null || value.isEmpty) {
@@ -98,7 +101,7 @@ class EventReservation extends StatelessWidget {
                 return null;
               },
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,

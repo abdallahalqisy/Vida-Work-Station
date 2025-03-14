@@ -35,6 +35,7 @@ dependencies:
   flutter_screenutil: ^5.9.3
   flutter_tawkto: ^0.0.4
   gif_view: ^1.0.0
+  intl: ^0.20.2
   url_launcher: ^6.3.1
 
 
