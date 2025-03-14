@@ -52,8 +52,7 @@ class CustomListView extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset(images[index], width: 100.w, height: 80.h),
-                SizedBox(height: 8.h),
+                Image.asset(images[index], width: 100.w, height: 100.h),
                 Expanded(
                   child: ListTile(
                     title: Text(
@@ -64,12 +63,14 @@ class CustomListView extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
+
                     subtitle: Text(
                       overflow: TextOverflow.ellipsis,
                       subtitle[index],
                       style: TextStyle(color: Colors.grey, fontSize: 12.sp),
                     ),
                   ),
+
                 ),
                 CustomButton(
                   color: colorScheme.surface,

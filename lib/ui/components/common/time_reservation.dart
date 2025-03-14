@@ -28,8 +28,6 @@ class _BookingScreenState extends State<BookingScreen> {
     "pm:08:00",
     "pm:09:00",
     "pm:10:00",
-    "pm:11:00",
-    "am:12:00",
   ];
 
   @override
@@ -60,38 +58,42 @@ class _BookingScreenState extends State<BookingScreen> {
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             /// **Dropdown for Date Selection**
             Row(
-              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                DropdownButton<String>(
-                  iconSize: 30,
-                  menuMaxHeight: 400,
-                  value: selectedDate,
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      selectedDate = newValue!;
-                    });
-                  },
-                  items:
-                      getUpcomingDates().map<DropdownMenuItem<String>>((
-                        String value,
-                      ) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                ),
-                const Spacer(),
                 Text(
                   "يرجى تحديد موعد الحجز",
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w600,
                     color: colorScheme.primary,
+                  ),
+                ),
+                const Spacer(),
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey[300]!),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: DropdownButton<String>(
+                    iconSize: 30,
+                    menuMaxHeight: 400,
+                    value: selectedDate,
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        selectedDate = newValue!;
+                      });
+                    },
+                    items:
+                        getUpcomingDates().map<DropdownMenuItem<String>>((
+                          String value,
+                        ) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
                   ),
                 ),
               ],

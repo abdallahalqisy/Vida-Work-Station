@@ -34,6 +34,7 @@ class TextFormFieldReservation extends StatelessWidget {
       width: width,
       height: height,
       child: TextFormField(
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         textInputAction: textInputAction,
         keyboardType: keyboardType,
         textDirection: direction1,
