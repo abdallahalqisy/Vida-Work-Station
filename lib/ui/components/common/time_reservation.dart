@@ -47,9 +47,10 @@ class _BookingScreenState extends State<BookingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
     return Container(
       width: double.infinity,
-      height: 300,
+      height: height * 0.3,
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey[300]!),
         color: colorScheme.shadow,

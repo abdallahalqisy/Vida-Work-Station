@@ -17,6 +17,7 @@ class EventReservation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
       child: Directionality(
@@ -38,7 +39,7 @@ class EventReservation extends StatelessWidget {
                     controller: nameController,
                     maxLines: 1,
                     keyboardType: TextInputType.name,
-                    width: 230,
+                    width: width * 0.54,
                     height: 80,
                     textInputAction: TextInputAction.next,
                     validator: (value) {
@@ -57,7 +58,7 @@ class EventReservation extends StatelessWidget {
                     controller: numberController,
                     maxLines: 1,
                     keyboardType: TextInputType.number,
-                    width: 150,
+                    width: width * 0.33,
                     height: 80,
                     textInputAction: TextInputAction.next,
                     validator: (value) {

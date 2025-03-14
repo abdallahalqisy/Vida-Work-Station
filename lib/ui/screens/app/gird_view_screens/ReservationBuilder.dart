@@ -14,7 +14,6 @@ class ReservationBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final heightContainer = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: colorScheme.surface,
@@ -29,50 +28,44 @@ class ReservationBuilder extends StatelessWidget {
           icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            ContainerBodyReservation(
-              title: info.title,
-              subTitle: info.description,
-              description: info.description2,
-              number: info.number,
-              image: info.image,
-              details: 'غير متاحه للحجز',
-            ),
-            const SizedBox(height: 20),
+      body: ListView(
+        children: [
+          ContainerBodyReservation(
+            title: info.title,
+            subTitle: info.description,
+            description: info.description2,
+            number: info.number,
+            image: info.image,
+            details: 'غير متاحه للحجز',
+          ),
+          const SizedBox(height: 20),
 
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8.w),
-              child: Container(
-                constraints: BoxConstraints(
-                  minHeight: heightContainer * 0.3,
-                  maxHeight: heightContainer * 0.85,
-                ),
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: colorScheme.shadow,
-                  borderRadius: BorderRadius.circular(10.r),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 1,
-                      blurRadius: 5,
-                      offset: const Offset(0, 3),
-                    ),
-                  ],
-                ),
-                child: CustomTabBar(
-                  tabBarViews: [
-                    EventReservation(),
-                    EventReservation(),
-                    EventInfo(),
-                  ],
-                ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 8.w),
+            child: Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: colorScheme.shadow,
+                borderRadius: BorderRadius.circular(10.r),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 1,
+                    blurRadius: 5,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+              ),
+              child: CustomTabBar(
+                tabBarViews: [
+                  EventReservation(), // Dynamic height
+                  EventReservation(), // Dynamic height
+                  EventInfo(), // Shorter height
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

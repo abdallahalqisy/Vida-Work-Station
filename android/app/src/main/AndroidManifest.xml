@@ -2,10 +2,10 @@
 
     <application
         android:name="${applicationName}"
+        android:extractNativeLibs="true"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="vida"
-        android:usesCleartextTraffic="true">
+        android:label="vida">
         <activity
 
             android:name=".MainActivity"

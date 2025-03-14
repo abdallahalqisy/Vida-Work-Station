@@ -30,7 +30,7 @@ class ContainerBody extends StatelessWidget {
       padding:  EdgeInsets.only(bottom: 15.h),
       child: Container(
         width: 220.w,
-        height: heightContainer * 0.58,
+        height: heightContainer * 0.5,
         decoration: BoxDecoration(
           color: colorScheme.shadow,
           borderRadius: BorderRadius.circular(20.r),
