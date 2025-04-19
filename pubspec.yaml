@@ -29,6 +29,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   cupertino_icons: ^1.0.8
+  dio: ^5.8.0+1
   flutter:
     sdk: flutter
   flutter_native_splash: ^2.4.5
@@ -36,6 +37,7 @@ dependencies:
   flutter_tawkto: ^0.0.4
   gif_view: ^1.0.0
   intl: ^0.20.2
+  shared_preferences: ^2.5.3
   url_launcher: ^6.3.1
 
 

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vida/constants/theme.dart';
-import 'package:vida/ui/screens/app/home/home_screen.dart';
+import 'package:vida/services/api_services/auth_services.dart';
 import 'package:vida/ui/components/common/buttons/custom_button_authentication.dart';
 import 'package:vida/ui/components/common/text_form_field/custom_text_form_field_auth.dart';
+import 'package:vida/ui/screens/app/home/home_screen.dart';
 import 'package:vida/ui/screens/onboarding/signup_screen.dart';
 
 class loginForm extends StatelessWidget {
@@ -73,12 +74,20 @@ class loginForm extends StatelessWidget {
           SizedBox(height: 30.h),
           CustomButton(
             text: 'Login',
-            onPressed: () {
+            onPressed: () async {
               if (formKey.currentState!.validate()) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => HomeScreen()),
-                );
+                await AuthServices().loginUser({
+                  'email': email,
+                  'password': password,
+                });
+
+                // Success - navigate to HomeScreen
+                if (context.mounted) {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => HomeScreen()),
+                  );
+                }
               }
             },
             textColor: colorScheme.shadow,

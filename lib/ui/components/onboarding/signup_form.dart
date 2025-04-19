@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vida/constants/theme.dart';
+import 'package:vida/services/api_services/auth_services.dart';
 import 'package:vida/ui/screens/app/home/home_screen.dart';
 import 'package:vida/ui/components/common/buttons/custom_button_authentication.dart';
 import 'package:vida/ui/components/common/text_form_field/custom_text_form_field_auth.dart';
@@ -9,7 +10,7 @@ import 'package:vida/ui/screens/onboarding/login_screen.dart';
 class signupForm extends StatelessWidget {
   signupForm({super.key});
 
-  String? name, email, password;
+  String? name, email, password, phone;
   final formKey = GlobalKey<FormState>();
 
   @override
@@ -29,7 +30,7 @@ class signupForm extends StatelessWidget {
               color: colorScheme.primary,
             ),
           ),
-          SizedBox(height: 50.h),
+          SizedBox(height: 25.h),
           CustomTextFormField(
             labelText: 'Name',
             hintText: 'John Doe',
@@ -45,6 +46,23 @@ class signupForm extends StatelessWidget {
             },
             icon: Icons.person,
           ),
+          SizedBox(height: 10.h),
+          CustomTextFormField(
+            labelText: 'Phone Number',
+            hintText: '+201234567890',
+            onChanged: (data) {
+              phone = data;
+            },
+            textInputAction: TextInputAction.next,
+            validator: (value) {
+              if (value!.isEmpty) {
+                return 'Please enter your Phone Number';
+              }
+              return null;
+            },
+            icon: Icons.phone,
+          ),
+
           SizedBox(height: 10.h),
           CustomTextFormField(
             hintText: 'Test@gmail.com',
@@ -89,12 +107,20 @@ class signupForm extends StatelessWidget {
           SizedBox(height: 30.h),
           CustomButton(
             text: 'Sign up',
-            onPressed: () {
+            onPressed: () async {
               if (formKey.currentState!.validate()) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => HomeScreen()),
-                );
+                await AuthServices().registerUser({
+                  'name': name,
+                  'email': email,
+                  'password': password,
+                  'phone': phone,
+                });
+                if (context.mounted) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HomeScreen()),
+                  );
+                }
               }
             },
             textColor: colorScheme.shadow,
