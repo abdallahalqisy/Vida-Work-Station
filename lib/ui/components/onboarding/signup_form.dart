@@ -8,6 +8,7 @@ import 'package:vida/ui/screens/onboarding/login_screen.dart';
 
 class signupForm extends StatelessWidget {
   signupForm({super.key});
+
   String? name, email, password;
   final formKey = GlobalKey<FormState>();
 
@@ -77,8 +78,9 @@ class signupForm extends StatelessWidget {
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return 'Please enter your password';
-              } else if (value.length < 6) {
-                return 'Password must be at least 6 characters';
+              } else if (value.length < 6 &&
+                  value.contains(RegExp(r'[@#\$&]'))) {
+                return 'Password must be at least 6 characters and Special characters like @, #,\$ , & are allowed';
               }
               return null;
             },
