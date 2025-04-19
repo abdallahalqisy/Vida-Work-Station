@@ -17,7 +17,6 @@ class CustomButton extends StatelessWidget {
   final Color color;
   final void Function() onPressed;
   final Color textColor;
-
   final Color borderColor;
 
   @override

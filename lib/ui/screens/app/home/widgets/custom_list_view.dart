@@ -7,7 +7,7 @@ class CustomListView extends StatelessWidget {
   CustomListView({super.key});
 
   final List<String> images = [
-    'assets/images/work_brain.jpg',
+    'assets/images/woke_brain.jpg',
     'assets/images/vip.jpg',
     'assets/images/grow.jpg',
     'assets/images/speak.jpg',
@@ -52,22 +52,25 @@ class CustomListView extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset(images[index], width: 100.w, height: 80.h),
-                SizedBox(height: 8.h),
-                ListTile(
-                  title: Text(
-                    title[index % 4],
-                    style: TextStyle(
-                      color: colorScheme.primary,
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
+                Image.asset(images[index], width: 100.w, height: 100.h),
+                Expanded(
+                  child: ListTile(
+                    title: Text(
+                      title[index % 4],
+                      style: TextStyle(
+                        color: colorScheme.primary,
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+
+                    subtitle: Text(
+                      overflow: TextOverflow.ellipsis,
+                      subtitle[index],
+                      style: TextStyle(color: Colors.grey, fontSize: 12.sp),
                     ),
                   ),
-                  subtitle: Text(
-                    overflow: TextOverflow.ellipsis,
-                    subtitle[index],
-                    style: TextStyle(color: Colors.grey, fontSize: 12.sp),
-                  ),
+
                 ),
                 CustomButton(
                   color: colorScheme.surface,
