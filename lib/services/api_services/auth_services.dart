@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vida/services/constant/api_uri.dart';
@@ -14,7 +13,11 @@ class AuthServices {
       if (response.statusCode == 200) {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString('token', response.data['token']);
+        prefs.setString('displayName', response.data['displayName']);
+        prefs.setString('email', response.data['email']);
         log(response.data['token']);
+        log(response.data['displayName']);
+        log(response.data['email']);
         return response.data;
       }
     } catch (e) {
@@ -31,7 +34,11 @@ class AuthServices {
       if (response.statusCode == 200) {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString('token', response.data['token']);
+        prefs.setString('displayName', response.data['displayName']);
+        prefs.setString('email', response.data['email']);
         log(response.data['token']);
+        log(response.data['displayName']);
+        log(response.data['email']);
         return response.data;
       }
     } catch (e) {

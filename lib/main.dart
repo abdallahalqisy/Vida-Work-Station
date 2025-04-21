@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vida/ui/screens/app/home/home_screen.dart';
 import 'package:vida/ui/screens/onboarding/login_screen.dart';
 
@@ -10,14 +11,42 @@ void main() {
 class VidaApp extends StatelessWidget {
   const VidaApp({super.key});
 
-  // This widget is the root of your application.
+  Future<Widget> _getInitialScreen() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token');
+    if (token != null && token.isNotEmpty) {
+      return HomeScreen();
+    } else {
+      return LoginScreen();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(375, 812),
       minTextAdapt: true,
-
-      child: MaterialApp(debugShowCheckedModeBanner: false, home: LoginScreen()),
+      builder: (context, child) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          home: FutureBuilder<Widget>(
+            future: _getInitialScreen(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Scaffold(
+                  body: Center(child: CircularProgressIndicator()),
+                );
+              } else if (snapshot.hasError) {
+                return const Scaffold(
+                  body: Center(child: Text('Something went wrong')),
+                );
+              } else {
+                return snapshot.data!;
+              }
+            },
+          ),
+        );
+      },
     );
   }
 }
