@@ -5,7 +5,7 @@ import 'package:vida/ui/components/common/body/container_body_reservation.dart';
 import 'package:vida/ui/components/common/body/custom_tab_bar.dart';
 import 'package:vida/ui/components/common/coming_event/event_info.dart';
 import 'package:vida/ui/components/common/coming_event/event_reservation.dart';
-import 'package:vida/ui/screens/app/gird_view_screens/info_category.dart';
+import 'package:vida/ui/screens/app/home/grid_view_screens/info_category.dart';
 
 class ReservationBuilder extends StatelessWidget {
   const ReservationBuilder({super.key, required this.info});

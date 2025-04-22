@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vida/constants/theme.dart';
-import 'package:vida/features/customer_services/customer_service_screen.dart';
+import 'package:vida/ui/screens/app/customer_services/customer_service_screen.dart';
 
 class AppBarHomeScreen extends StatelessWidget implements PreferredSizeWidget {
   // Implement PreferredSizeWidget

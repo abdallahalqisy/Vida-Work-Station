@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:vida/ui/screens/app/gird_view_screens/ListViewBuilder.dart';
-import 'package:vida/ui/screens/app/gird_view_screens/info_category.dart';
+import 'package:vida/ui/screens/app/home/grid_view_screens/ListViewBuilder.dart';
+import 'package:vida/ui/screens/app/home/grid_view_screens/info_category.dart';
+
 
 class MeetingRooms extends StatelessWidget {
   const MeetingRooms({super.key});

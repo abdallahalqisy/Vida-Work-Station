@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_tawkto/flutter_tawk.dart';
 import 'package:gif_view/gif_view.dart';
@@ -35,10 +36,10 @@ class _CustomerServiceScreenState extends State<CustomerServiceScreen> {
           email: 'ayoubamine2a@gmail.com',
         ),
         onLoad: () {
-          print('Hello Tawk!');
+          log('Hello Tawk!');
         },
         onLinkTap: (String url) {
-          print(url);
+          log(url);
         },
         placeholder: Container(
           height: double.infinity,

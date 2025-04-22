@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vida/constants/theme.dart';
-import 'package:vida/ui/screens/app/gird_view_screens/course/courses/business.dart';
-import 'package:vida/ui/screens/app/gird_view_screens/course/courses/coding.dart';
-import 'package:vida/ui/screens/app/gird_view_screens/course/courses/english.dart';
-import 'package:vida/ui/screens/app/gird_view_screens/course/courses/graphics.dart';
-import 'package:vida/ui/screens/app/gird_view_screens/course/courses/media.dart';
-import 'package:vida/ui/screens/app/gird_view_screens/course/courses/soft%20skills.dart';
+import 'package:vida/ui/screens/app/home/grid_view_screens/course/courses/business.dart';
+import 'package:vida/ui/screens/app/home/grid_view_screens/course/courses/coding.dart';
+import 'package:vida/ui/screens/app/home/grid_view_screens/course/courses/english.dart';
+import 'package:vida/ui/screens/app/home/grid_view_screens/course/courses/graphics.dart';
+import 'package:vida/ui/screens/app/home/grid_view_screens/course/courses/media.dart';
+import 'package:vida/ui/screens/app/home/grid_view_screens/course/courses/soft_skills.dart';
 
 class Courses extends StatelessWidget {
   Courses({super.key});
@@ -25,7 +25,7 @@ class Courses extends StatelessWidget {
     'graphics',
     'english',
     'media',
-    'coding'
+    'coding',
   ];
 
   final List<Widget> pages = [
@@ -84,12 +84,18 @@ class Courses extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Image.asset(images[index % 6], width: 100.w, height: 100.h),
+                      Image.asset(
+                        images[index % 6],
+                        width: 100.w,
+                        height: 100.h,
+                      ),
                       GestureDetector(
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => pages[index % 6]),
+                            MaterialPageRoute(
+                              builder: (context) => pages[index % 6],
+                            ),
                           );
                         },
                         child: Text(
@@ -101,7 +107,8 @@ class Courses extends StatelessWidget {
                           ),
                         ),
                       ),
-                    ],),
+                    ],
+                  ),
                 );
               },
             ),
