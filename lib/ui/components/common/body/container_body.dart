@@ -13,6 +13,7 @@ class ContainerBody extends StatelessWidget {
     required this.number,
     required this.price,
     required this.onPressed,
+    required this.buttonColor,
   });
 
   final String image;
@@ -22,12 +23,13 @@ class ContainerBody extends StatelessWidget {
   final int number;
   final int price;
   final Function() onPressed;
+  final Color buttonColor;
 
   @override
   Widget build(BuildContext context) {
     final heightContainer = MediaQuery.of(context).size.height;
     return Padding(
-      padding:  EdgeInsets.only(bottom: 15.h),
+      padding: EdgeInsets.only(bottom: 15.h),
       child: Container(
         width: 220.w,
         height: heightContainer * 0.5,
@@ -52,7 +54,7 @@ class ContainerBody extends StatelessWidget {
                   topLeft: Radius.circular(15.r),
                   topRight: Radius.circular(15.r),
                 ),
-                child: Image.asset(
+                child: Image.network(
                   image,
                   fit: BoxFit.fill,
                   height: 180.h,
@@ -60,28 +62,23 @@ class ContainerBody extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 5),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    title,
-                    style: TextStyle(
-                      fontSize: 15.sp,
-                      fontWeight: FontWeight.bold,
-                      color: colorScheme.surface,
-                    ),
-                  ),
-                  const SizedBox(width: 5),
-                  const Icon(Icons.check_circle, color: Colors.teal, size: 16),
-                ],
-              ),
-              const SizedBox(height: 3),
+
               Text(
-                description,
+                title,
                 style: TextStyle(
                   fontSize: 22.sp,
                   fontWeight: FontWeight.bold,
                   color: colorScheme.primary,
+                ),
+              ),
+              const SizedBox(height: 5),
+              Text(
+                textAlign: TextAlign.center,
+                description,
+                style: TextStyle(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.grey[800],
                 ),
               ),
               const SizedBox(height: 5),
@@ -103,22 +100,7 @@ class ContainerBody extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 3),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Vida WorkStation",
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey[700],
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  const SizedBox(width: 5),
-                  const Icon(Icons.location_on, color: Colors.grey, size: 18),
-                ],
-              ),
-              const SizedBox(height: 3),
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -136,7 +118,7 @@ class ContainerBody extends StatelessWidget {
               CustomButton(
                 minWidth: 100,
                 text: 'احجز الان ',
-                color: colorScheme.surface,
+                color: buttonColor,
                 onPressed: onPressed,
                 textColor: colorScheme.shadow,
                 borderColor: colorScheme.surface,

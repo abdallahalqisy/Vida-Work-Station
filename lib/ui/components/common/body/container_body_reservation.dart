@@ -55,7 +55,7 @@ class ContainerBodyReservation extends StatelessWidget {
                           Text(
                             title,
                             style: TextStyle(
-                              fontSize: 15.sp,
+                              fontSize: 18.sp,
                               fontWeight: FontWeight.bold,
                               color: colorScheme.surface,
                             ),
@@ -72,7 +72,7 @@ class ContainerBodyReservation extends StatelessWidget {
                       Text(
                         subTitle,
                         style: TextStyle(
-                          fontSize: 18.sp,
+                          fontSize: 20.sp,
                           fontWeight: FontWeight.bold,
                           color: colorScheme.primary,
                         ),
@@ -81,7 +81,7 @@ class ContainerBodyReservation extends StatelessWidget {
                       Text(
                         description,
                         style: TextStyle(
-                          fontSize: 10.sp,
+                          fontSize: 13.sp,
                           fontWeight: FontWeight.w500,
                           color: Colors.grey[700],
                         ),
@@ -94,55 +94,29 @@ class ContainerBodyReservation extends StatelessWidget {
                           (index) => const Icon(
                             Icons.star,
                             color: Colors.amber,
-                            size: 15,
+                            size: 20,
                           ),
                         ),
                       ),
                       const SizedBox(height: 3),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Vida WorkStation",
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.grey[700],
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          const SizedBox(width: 5),
-                          const Icon(
-                            Icons.location_on,
-                            color: Colors.grey,
-                            size: 15,
-                          ),
-                        ],
-                      ),
                     ],
                   ),
                   const Spacer(),
                   ClipRRect(
                     borderRadius: BorderRadius.circular(20.r),
-                    child: Image.asset(
+                    child: Image.network(
                       image,
                       fit: BoxFit.fill,
                       height: 120.h,
-                      width: 130.w,
+                      width: 160.w,
                     ),
                   ),
                 ],
               ),
+              const SizedBox(height: 20),
               Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  CustomButton(
-                    text: details,
-                    onPressed: () {},
-                    minWidth: 100,
-                    color: colorScheme.surface,
-                    textColor: colorScheme.shadow,
-                    borderColor: colorScheme.surface,
-                  ),
-                  const SizedBox(width: 15),
                   Text(
                     'سعه الاشخاص:50',
                     style: TextStyle(
@@ -153,6 +127,15 @@ class ContainerBodyReservation extends StatelessWidget {
                   ),
                   Icon(Icons.bookmark_border),
                 ],
+              ),
+              const SizedBox(height: 10),
+              CustomButton(
+                text: details,
+                onPressed: () {},
+                minWidth: 100,
+                color: colorScheme.surface,
+                textColor: colorScheme.shadow,
+                borderColor: colorScheme.surface,
               ),
             ],
           ),

@@ -28,6 +28,7 @@ class Business extends StatelessWidget {
   //make info scroll
   @override
   Widget build(BuildContext context) {
-    return ListViewBuilder(infoList: infoList);
+    // return ListViewBuilder(infoList: infoList);
+    return Text('data');
   }
 }

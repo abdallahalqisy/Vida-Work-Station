@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vida/constants/theme.dart';
@@ -27,9 +29,14 @@ class _HomeDrawerState extends State<HomeDrawer> {
   Future<void> _loadUserDataFromToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      userName = prefs.getString('displayName');
-      userEmail = prefs.getString('email');
+      userName = prefs.getString('displayName') ?? 'Guest User';
+
+      userEmail = prefs.getString('email') ?? 'No email available';
     });
+
+    // Debug log to verify what's being loaded
+    log('Drawer loaded displayName: $userName');
+    log('Drawer loaded email: $userEmail');
   }
 
   @override
@@ -104,20 +111,20 @@ class _HomeDrawerState extends State<HomeDrawer> {
               leading: const Icon(Icons.emoji_events),
               title: const Text('Coming events'),
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const ComingEvents()),
-                );
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(builder: (context) => const ComingEvents()),
+                // );
               },
             ),
             ListTile(
               leading: const Icon(Icons.library_books),
               title: const Text('courses'),
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Courses()),
-                );
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(builder: (context) => Courses()),
+                // );
               },
             ),
             ListTile(

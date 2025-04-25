@@ -5,7 +5,7 @@ import 'package:vida/ui/screens/app/home/grid_view_screens/info_category.dart';
 class Graphics extends StatelessWidget {
   const Graphics({super.key});
 
-    final List<InfoCategory> infoList = const [
+  final List<InfoCategory> infoList = const [
     InfoCategory(
       image: 'assets/images/UX Design.jpeg',
       title: "Graphics",
@@ -23,10 +23,12 @@ class Graphics extends StatelessWidget {
       price: 15,
     ),
   ];
+
   // make it scroll with same as events
   //make info scroll
   @override
   Widget build(BuildContext context) {
-    return ListViewBuilder(infoList: infoList);
+    // return ListViewBuilder(infoList: infoList);
+    return Text('data');
   }
-  }
+}
