@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:vida/ui/components/onboarding/signup_form.dart';
 
 class SignupScreen extends StatelessWidget {
-  SignupScreen({super.key});
+  const SignupScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class SignupScreen extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
-          child: signupForm(),
+          child: SignupForm(),
         ),
       ),
     );

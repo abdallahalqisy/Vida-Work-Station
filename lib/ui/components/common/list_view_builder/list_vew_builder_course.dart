@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vida/constants/theme.dart';
-import 'package:vida/models/space_model.dart';
+import 'package:vida/models/courses_model/courses_model.dart';
 import 'package:vida/ui/components/common/body/container_body.dart';
-import 'package:vida/ui/screens/app/home/grid_view_screens/ReservationBuilder.dart';
+import 'package:vida/ui/components/common/reservation_builder/reservation_builder_course.dart';
 
-class ListViewBuilder extends StatelessWidget {
-  const ListViewBuilder({super.key, required this.spaceList});
+class ListViewBuildCourse extends StatelessWidget {
+  const ListViewBuildCourse({super.key, required this.courseList});
 
-  final List<SpaceModel> spaceList;
+  final List<CoursesModel> courseList;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class ListViewBuilder extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: colorScheme.surface,
         title: Text(
-          spaceList.isNotEmpty ? spaceList[0].type : 'Spaces',
+          courseList.isNotEmpty ? courseList[0].type! : 'Courses',
           style: const TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.w500,
@@ -30,29 +30,31 @@ class ListViewBuilder extends StatelessWidget {
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 80.w, vertical: 15.h),
         child: ListView.builder(
-          itemCount: spaceList.length,
+          itemCount: courseList.length,
           itemBuilder: (context, index) {
-            final space = spaceList[index];
+            final course = courseList[index];
             return ContainerBody(
-              image: space.imageUrl,
-              title: space.name,
-              description: space.description,
-              description2: space.instructorEmail,
+              image: course.imageUrl!,
+              title: course.title!,
+              description: course.description!,
+              description2: course.instructorEmail!,
               number: 5,
-              price: space.capacity,
+              // You can put course.maxParticipants here
+              price: course.price!,
               onPressed:
-                  space.isActive
+                  course.isActive!
                       ? () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder:
-                                (context) => ReservationBuilder(space: space),
+                                (context) =>
+                                    ReservationBuilderCourse(course: course),
                           ),
                         );
                       }
                       : () {},
-              buttonColor: space.isActive ? colorScheme.surface : Colors.grey,
+              buttonColor: course.isActive! ? colorScheme.surface : Colors.grey,
             );
           },
         ),

@@ -29,12 +29,12 @@ class Courses extends StatelessWidget {
   ];
 
   final List<Widget> pages = [
-    // const Business(),
-    // const SoftSkills(),
-    // const Graphics(),
-    // const English(),
-    // const Media(),
-    // const Coding(),
+    const Business(),
+    const SoftSkills(),
+    const GraphicDesign(),
+    const English(),
+    const Media(),
+    const Coding(),
   ];
 
   @override

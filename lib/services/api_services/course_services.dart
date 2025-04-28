@@ -9,7 +9,7 @@ import 'package:vida/services/constant/api_uri.dart';
 class CourseServices {
   Future<List<CoursesModel>> fetchCourses() async {
     try {
-      final response = await Dio().get('$baseUrl/Courses');
+      final response = await Dio().get('$baseUrl/Course');
 
       if (response.statusCode == 200) {
         return (response.data as List)

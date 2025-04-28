@@ -23,6 +23,16 @@ class AvailabilityModel {
     );
   }
 
+  factory AvailabilityModel.empty() {
+    return AvailabilityModel(
+      dayOfWeek: 0,
+      openTime: '',
+      closeTime: '',
+      isActive: false,
+      id: 0,
+    );
+  }
+
   Map<String, dynamic> toJson() {
     return {
       'dayOfWeek': dayOfWeek,

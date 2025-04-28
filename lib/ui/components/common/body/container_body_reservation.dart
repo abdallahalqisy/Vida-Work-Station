@@ -12,6 +12,8 @@ class ContainerBodyReservation extends StatelessWidget {
     required this.number,
     required this.image,
     required this.details,
+    this.capacity,
+    this.price,
   });
 
   final String title;
@@ -20,6 +22,8 @@ class ContainerBodyReservation extends StatelessWidget {
   final int number;
   final String image;
   final String details;
+  final int? capacity;
+  final double? price;
 
   @override
   Widget build(BuildContext context) {
@@ -47,87 +51,112 @@ class ContainerBodyReservation extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            title,
-                            style: TextStyle(
-                              fontSize: 18.sp,
-                              fontWeight: FontWeight.bold,
-                              color: colorScheme.surface,
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                subTitle,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.bold,
+                                  color: colorScheme.surface,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 5),
+                            const Icon(
+                              Icons.check_circle,
+                              color: Colors.teal,
+                              size: 16,
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 5),
+                        Text(
+                          title,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.bold,
+                            color: colorScheme.primary,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          description,
+                          textAlign: TextAlign.start,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontSize: 13.sp,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.grey[700],
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Row(
+                          children: List.generate(
+                            number,
+                            (index) => const Icon(
+                              Icons.star,
+                              color: Colors.amber,
+                              size: 20,
                             ),
                           ),
-                          const SizedBox(width: 5),
-                          const Icon(
-                            Icons.check_circle,
-                            color: Colors.teal,
-                            size: 16,
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 3),
-                      Text(
-                        subTitle,
-                        style: TextStyle(
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.bold,
-                          color: colorScheme.primary,
                         ),
-                      ),
-                      const SizedBox(height: 5),
-                      Text(
-                        description,
-                        style: TextStyle(
-                          fontSize: 13.sp,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.grey[700],
-                        ),
-                      ),
-                      const SizedBox(height: 3),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: List.generate(
-                          number,
-                          (index) => const Icon(
-                            Icons.star,
-                            color: Colors.amber,
-                            size: 20,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 3),
-                    ],
+                      ],
+                    ),
                   ),
-                  const Spacer(),
+                  const SizedBox(width: 10),
                   ClipRRect(
                     borderRadius: BorderRadius.circular(20.r),
                     child: Image.network(
                       image,
-                      fit: BoxFit.fill,
+                      fit: BoxFit.cover,
                       height: 120.h,
-                      width: 160.w,
+                      width: 140.w,
                     ),
                   ),
                 ],
               ),
               const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'سعه الاشخاص:50',
-                    style: TextStyle(
-                      fontSize: 15.sp,
-                      fontWeight: FontWeight.bold,
-                      color: colorScheme.primary,
+              if (price != null)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "${price!.toStringAsFixed(2)} EGP",
+                      style: TextStyle(
+                        fontSize: 15.sp,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.grey[700],
+                      ),
                     ),
-                  ),
-                  Icon(Icons.bookmark_border),
-                ],
-              ),
+                  ],
+                )
+              else if (capacity != null)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "$capacity سعة الأشخاص",
+                      style: TextStyle(
+                        fontSize: 15.sp,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.grey[700],
+                      ),
+                    ),
+                    const SizedBox(width: 5),
+                    const Icon(Icons.bookmark_border),
+                  ],
+                ),
               const SizedBox(height: 10),
               CustomButton(
                 text: details,

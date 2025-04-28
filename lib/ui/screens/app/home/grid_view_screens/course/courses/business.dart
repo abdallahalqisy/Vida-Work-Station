@@ -1,34 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:vida/ui/screens/app/home/grid_view_screens/ListViewBuilder.dart';
-import 'package:vida/ui/screens/app/home/grid_view_screens/info_category.dart';
-
+import 'package:vida/models/courses_model/courses_model.dart';
+import 'package:vida/services/api_services/course_services.dart';
+import 'package:vida/ui/components/common/list_view_builder/list_vew_builder_course.dart';
+import 'package:vida/ui/components/common/loading.dart';
 
 class Business extends StatelessWidget {
   const Business({super.key});
 
-    final List<InfoCategory> infoList = const [
-    InfoCategory(
-      image: 'assets/images/Project Management.jpg',
-      title: "Business",
-      description: "Project Management",
-      description2: "Vida's community",
-      number: 5,
-      price: 25,
-    ),
-    InfoCategory(
-      image: 'assets/images/Digital Marketing.jpeg',
-      title: "Business",
-      description: "Digital Marketing",
-      description2: "Vida's community",
-      number: 5,
-      price: 20,
-    ),
-  ];
-  // make it scroll with same as events
-  //make info scroll
+  Future<List<CoursesModel>> fetchBusinessCourses() async {
+    final allCourses = await CourseServices().fetchCourses();
+    return allCourses
+        .where((course) => course.type?.toLowerCase() == 'business')
+        .toList();
+  }
+
   @override
   Widget build(BuildContext context) {
-    // return ListViewBuilder(infoList: infoList);
-    return Text('data');
+    return FutureBuilder<List<CoursesModel>>(
+      future: fetchBusinessCourses(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: LoadingScreen());
+        } else if (snapshot.hasError) {
+          return Center(child: Text('Error: ${snapshot.error}'));
+        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+          return const Center(child: Text('No Business Courses available.'));
+        } else {
+          return ListViewBuildCourse(courseList: snapshot.data!);
+        }
+      },
+    );
   }
 }

@@ -11,7 +11,8 @@ class ContainerBody extends StatelessWidget {
     required this.description,
     required this.description2,
     required this.number,
-    required this.price,
+    this.price,
+    this.capacity,
     required this.onPressed,
     required this.buttonColor,
   });
@@ -21,18 +22,20 @@ class ContainerBody extends StatelessWidget {
   final String description;
   final String description2;
   final int number;
-  final int price;
+  final double? price;
+  final int? capacity;
   final Function() onPressed;
   final Color buttonColor;
 
   @override
   Widget build(BuildContext context) {
     final heightContainer = MediaQuery.of(context).size.height;
+
     return Padding(
       padding: EdgeInsets.only(bottom: 15.h),
       child: Container(
         width: 220.w,
-        height: heightContainer * 0.5,
+        height: heightContainer * 0.51,
         decoration: BoxDecoration(
           color: colorScheme.shadow,
           borderRadius: BorderRadius.circular(20.r),
@@ -50,38 +53,52 @@ class ContainerBody extends StatelessWidget {
           child: Column(
             children: [
               ClipRRect(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(15.r),
-                  topRight: Radius.circular(15.r),
-                ),
+                borderRadius: BorderRadius.circular(20.r),
                 child: Image.network(
                   image,
                   fit: BoxFit.fill,
-                  height: 180.h,
+                  height: 160.h,
                   width: 200.w,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Container(
+                      height: 120.h,
+                      width: 160.w,
+                      color: Colors.grey[300],
+                      child: Icon(
+                        Icons.broken_image,
+                        size: 50,
+                        color: Colors.grey,
+                      ),
+                    );
+                  },
                 ),
               ),
-              const SizedBox(height: 5),
 
+              const SizedBox(height: 8),
               Text(
                 title,
                 style: TextStyle(
-                  fontSize: 22.sp,
+                  fontSize: 18.sp,
                   fontWeight: FontWeight.bold,
                   color: colorScheme.primary,
                 ),
               ),
-              const SizedBox(height: 5),
-              Text(
-                textAlign: TextAlign.center,
-                description,
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.grey[800],
+              const SizedBox(height: 8),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Text(
+                  textAlign: TextAlign.start,
+                  description,
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.grey[800],
+                  ),
                 ),
               ),
-              const SizedBox(height: 5),
+              const SizedBox(height: 8),
               Text(
                 description2,
                 style: TextStyle(
@@ -99,25 +116,42 @@ class ContainerBody extends StatelessWidget {
                       const Icon(Icons.star, color: Colors.amber, size: 20),
                 ),
               ),
+              const SizedBox(height: 8),
+
+              (price != null)
+                  ? Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "$price EGP",
+                        style: TextStyle(
+                          fontSize: 15.sp,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey[700],
+                        ),
+                      ),
+                    ],
+                  )
+                  : Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "$capacity",
+                        style: TextStyle(
+                          fontSize: 15.sp,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey[700],
+                        ),
+                      ),
+                      Icon(Icons.signpost_outlined, color: Colors.grey[700]),
+                    ],
+                  ),
+
               const SizedBox(height: 3),
 
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "$price EGP",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.grey[700],
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 3),
               CustomButton(
                 minWidth: 100,
-                text: 'احجز الان ',
+                text: 'احجز الان',
                 color: buttonColor,
                 onPressed: onPressed,
                 textColor: colorScheme.shadow,

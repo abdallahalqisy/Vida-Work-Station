@@ -7,9 +7,22 @@ class AuthServices {
   final Dio dio = Dio();
 
   // Register Request
-  Future<dynamic> registerUser(Map<String, dynamic> data) async {
+  Future<dynamic> registerUser(
+    String name,
+    String password,
+    String email,
+    String phoneNumber,
+  ) async {
     try {
-      final response = await dio.post('$baseUrl/Auth/register', data: data);
+      final response = await dio.post(
+        '$baseUrl/Auth/register',
+        data: {
+          "displayName": name,
+          "password": password,
+          "email": email,
+          "phoneNumber": phoneNumber,
+        },
+      );
 
       if (response.statusCode == 200) {
         // Check if response data contains expected fields
@@ -21,11 +34,13 @@ class AuthServices {
           prefs.setString('token', responseData['token'] ?? '');
           prefs.setString('displayName', responseData['displayName'] ?? '');
           prefs.setString('email', responseData['email'] ?? '');
+          prefs.setString('userId', responseData['id'] ?? '');
 
           // Log for debugging
           log('Token: ${responseData['token']}');
           log('Display Name: ${responseData['displayName']}');
           log('Email: ${responseData['email']}');
+          log('User ID: ${responseData['id']}');
 
           return responseData;
         } else {
@@ -50,9 +65,6 @@ class AuthServices {
         }
       }
       return "The email already exists or server error occurred";
-    } catch (e) {
-      log('Register error: $e');
-      return "Registration failed: $e";
     }
   }
 
@@ -71,11 +83,13 @@ class AuthServices {
           prefs.setString('token', responseData['token'] ?? '');
           prefs.setString('displayName', responseData['displayName'] ?? '');
           prefs.setString('email', responseData['email'] ?? '');
+          prefs.setString('userId', responseData['id'] ?? '');
 
           // Log for debugging
           log('Token: ${responseData['token']}');
           log('Display Name: ${responseData['displayName']}');
           log('Email: ${responseData['email']}');
+          log('User ID: ${responseData['id']}');
 
           return responseData;
         } else {
@@ -100,9 +114,6 @@ class AuthServices {
         }
       }
       return "The email or password you entered is incorrect, try again.";
-    } catch (e) {
-      log('Login error: $e');
-      return "Login failed: $e";
     }
   }
 }

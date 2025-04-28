@@ -20,16 +20,15 @@ class PulseLoadingIndicator extends StatefulWidget {
   State<PulseLoadingIndicator> createState() => _PulseLoadingIndicatorState();
 }
 
-class _PulseLoadingIndicatorState extends State<PulseLoadingIndicator> with SingleTickerProviderStateMixin {
+class _PulseLoadingIndicatorState extends State<PulseLoadingIndicator>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: widget.duration,
-    )..repeat();
+    _controller = AnimationController(vsync: this, duration: widget.duration)
+      ..repeat();
   }
 
   @override
@@ -66,18 +65,16 @@ class PulsePainter extends CustomPainter {
   final double progress;
   final Color lineColor;
 
-  PulsePainter({
-    required this.progress,
-    required this.lineColor,
-  });
+  PulsePainter({required this.progress, required this.lineColor});
 
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = lineColor
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 2.0
-      ..strokeCap = StrokeCap.round;
+    final paint =
+        Paint()
+          ..color = lineColor
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 2.5
+          ..strokeCap = StrokeCap.round;
 
     final center = Offset(size.width / 2, size.height / 2);
     final radius = math.min(size.width, size.height) / 2;
@@ -86,23 +83,23 @@ class PulsePainter extends CustomPainter {
     final path = Path();
 
     // Starting point (left side)
-    final startX = center.dx - radius * 0.7;
+    final startX = center.dx - radius * 0.5; // Reduced horizontal space
     path.moveTo(startX, center.dy);
 
-    // First segment - flat line
-    path.lineTo(center.dx - radius * 0.3, center.dy);
+    // First segment - flat line (shorter)
+    path.lineTo(center.dx - radius * 0.25, center.dy);
 
-    // ECG spike up
-    path.lineTo(center.dx - radius * 0.2, center.dy - radius * 0.4);
+    // ECG spike up (sharper)
+    path.lineTo(center.dx - radius * 0.15, center.dy - radius * 0.5);
 
-    // ECG spike down
-    path.lineTo(center.dx, center.dy + radius * 0.4);
+    // ECG spike down (sharper)
+    path.lineTo(center.dx, center.dy + radius * 0.5);
 
-    // ECG spike up again
-    path.lineTo(center.dx + radius * 0.2, center.dy - radius * 0.15);
+    // ECG spike up again (sharper)
+    path.lineTo(center.dx + radius * 0.15, center.dy - radius * 0.2);
 
-    // End with flat line
-    path.lineTo(center.dx + radius * 0.7, center.dy);
+    // End with flat line (shorter)
+    path.lineTo(center.dx + radius * 0.5, center.dy);
 
     // Create path metrics to animate the drawing
     final PathMetrics pathMetrics = path.computeMetrics();
@@ -120,7 +117,8 @@ class PulsePainter extends CustomPainter {
 
   @override
   bool shouldRepaint(PulsePainter oldDelegate) {
-    return oldDelegate.progress != progress || oldDelegate.lineColor != lineColor;
+    return oldDelegate.progress != progress ||
+        oldDelegate.lineColor != lineColor;
   }
 }
 
@@ -132,9 +130,7 @@ class LoadingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Center(
-        child: PulseLoadingIndicator(),
-      ),
+      body: Center(child: PulseLoadingIndicator()),
     );
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vida/constants/theme.dart';
@@ -7,8 +9,8 @@ import 'package:vida/ui/components/common/text_form_field/custom_text_form_field
 import 'package:vida/ui/screens/app/home/home_screen.dart';
 import 'package:vida/ui/screens/onboarding/signup_screen.dart';
 
-class loginForm extends StatelessWidget {
-  loginForm({super.key});
+class LoginForm extends StatelessWidget {
+  LoginForm({super.key});
 
   String? email, password;
   final formKey = GlobalKey<FormState>();
@@ -64,7 +66,7 @@ class loginForm extends StatelessWidget {
               if (value == null || value.isEmpty) {
                 return 'Please enter your password';
               } else if (value.length < 6 &&
-                  value.contains(RegExp(r'[@#\$&]'))) {
+                  value.contains(RegExp(r'[@#$&]'))) {
                 return 'Password must be at least 6 characters and Special characters like @, #,\$ ,  & are allowed';
               }
               return null;
@@ -76,20 +78,44 @@ class loginForm extends StatelessWidget {
             text: 'Login',
             onPressed: () async {
               if (formKey.currentState!.validate()) {
-                await AuthServices().loginUser({
-                  'email': email,
-                  'password': password,
-                });
+                try {
+                  final result = await AuthServices().loginUser({
+                    'email': email,
+                    'password': password,
+                  });
 
-                // Success - navigate to HomeScreen
-                if (context.mounted) {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => HomeScreen()),
-                  );
+                  if (context.mounted) {
+                    if (result is Map<String, dynamic>) {
+                      // ✅ Successful login
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const HomeScreen(),
+                        ),
+                      );
+                    } else if (result is String) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(result),
+                          backgroundColor: Colors.red,
+                        ),
+                      );
+                    }
+                  }
+                } catch (e) {
+                  log('Unexpected error: $e');
+                  if (context.mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text("An unexpected error occurred."),
+                        backgroundColor: Colors.red,
+                      ),
+                    );
+                  }
                 }
               }
             },
+
             textColor: colorScheme.shadow,
             buttonColor: colorScheme.surface,
           ),

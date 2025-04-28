@@ -17,7 +17,7 @@ class LoginScreen extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
-          child: loginForm(),
+          child: LoginForm(),
         ),
       ),
     );

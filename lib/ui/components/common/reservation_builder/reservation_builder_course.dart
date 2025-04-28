@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vida/constants/theme.dart';
-import 'package:vida/models/space_model.dart';
+import 'package:vida/models/courses_model/courses_model.dart';
 import 'package:vida/ui/components/common/body/container_body_reservation.dart';
 import 'package:vida/ui/components/common/body/custom_tab_bar.dart';
 import 'package:vida/ui/components/common/coming_event/event_info.dart';
 import 'package:vida/ui/components/common/coming_event/event_reservation.dart';
 
-class ReservationBuilder extends StatelessWidget {
-  const ReservationBuilder({super.key, required this.space});
+class ReservationBuilderCourse extends StatelessWidget {
+  const ReservationBuilderCourse({super.key, required this.course});
 
-  final SpaceModel space;
+  final CoursesModel course;
 
   @override
   Widget build(BuildContext context) {
@@ -29,15 +29,13 @@ class ReservationBuilder extends StatelessWidget {
       body: ListView(
         children: [
           ContainerBodyReservation(
-            title: space.type,
-            subTitle: space.name,
-            description: space.instructorEmail,
+            title: course.title!,
+            subTitle: course.type!,
+            description: course.description!,
             number: 5,
-            image: space.imageUrl,
-            details:
-                space.requiresApproval
-                    ? 'Requires approval'
-                    : 'Available for reservation',
+            image: course.imageUrl!,
+            details: course.isActive! ? 'Active Course' : 'Inactive Course',
+            price: course.price!,
           ),
           const SizedBox(height: 20),
           Padding(
