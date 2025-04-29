@@ -9,7 +9,7 @@ class TextFormFieldReservation extends StatelessWidget {
     required this.controller,
     required this.maxLines,
     required this.keyboardType,
-    required this.width,
+    this.width,
     required this.height,
     required this.textInputAction,
     required this.validator,
@@ -22,7 +22,7 @@ class TextFormFieldReservation extends StatelessWidget {
   final TextDirection direction1;
   final TextDirection direction2;
   final TextInputType keyboardType;
-  final double width;
+  final double? width;
 
   final double height;
   final TextInputAction? textInputAction;

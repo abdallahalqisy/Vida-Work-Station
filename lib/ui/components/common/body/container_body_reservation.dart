@@ -56,8 +56,9 @@ class ContainerBodyReservation extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
+                          mainAxisSize: MainAxisSize.min,
                           children: [
-                            Expanded(
+                            Flexible(
                               child: Text(
                                 subTitle,
                                 maxLines: 1,
@@ -77,6 +78,7 @@ class ContainerBodyReservation extends StatelessWidget {
                             ),
                           ],
                         ),
+
                         const SizedBox(height: 5),
                         Text(
                           title,
@@ -92,7 +94,7 @@ class ContainerBodyReservation extends StatelessWidget {
                         Text(
                           description,
                           textAlign: TextAlign.start,
-                          maxLines: 2,
+                          maxLines: 3,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                             fontSize: 13.sp,
@@ -126,7 +128,7 @@ class ContainerBodyReservation extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 15),
               if (price != null)
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -157,10 +159,11 @@ class ContainerBodyReservation extends StatelessWidget {
                     const Icon(Icons.bookmark_border),
                   ],
                 ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 5),
               CustomButton(
                 text: details,
-                onPressed: () {},
+                onPressed: () {
+                },
                 minWidth: 100,
                 color: colorScheme.surface,
                 textColor: colorScheme.shadow,

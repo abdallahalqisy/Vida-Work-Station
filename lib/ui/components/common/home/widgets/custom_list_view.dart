@@ -36,6 +36,7 @@ class CustomListView extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: 10.0),
           child: Container(
             width: 150.w,
+            // height: 20.h,
             margin: EdgeInsets.symmetric(horizontal: 8.w),
             decoration: BoxDecoration(
               color: Colors.white,
@@ -59,7 +60,7 @@ class CustomListView extends StatelessWidget {
                       title[index % 4],
                       style: TextStyle(
                         color: colorScheme.primary,
-                        fontSize: 15,
+                        fontSize: 16.sp,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -67,18 +68,23 @@ class CustomListView extends StatelessWidget {
                     subtitle: Text(
                       overflow: TextOverflow.ellipsis,
                       subtitle[index],
-                      style: TextStyle(color: Colors.grey, fontSize: 12.sp),
+                      style: TextStyle(
+                        color: Colors.grey[700],
+                        fontSize: 12.sp,
+                      ),
                     ),
                   ),
-
                 ),
-                CustomButton(
-                  color: colorScheme.surface,
-                  minWidth: 100,
-                  text: 'احجز الان',
-                  onPressed: () {},
-                  textColor: colorScheme.shadow,
-                  borderColor: colorScheme.surface,
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 10.0),
+                  child: CustomButton(
+                    color: colorScheme.surface,
+                    minWidth: 100,
+                    text: 'احجز الان',
+                    onPressed: () {},
+                    textColor: colorScheme.shadow,
+                    borderColor: colorScheme.surface,
+                  ),
                 ),
               ],
             ),

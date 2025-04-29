@@ -3,8 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vida/constants/theme.dart';
 import 'package:vida/models/courses_model/courses_model.dart';
 import 'package:vida/ui/components/common/body/container_body_reservation.dart';
-import 'package:vida/ui/components/common/body/custom_tab_bar.dart';
-import 'package:vida/ui/components/common/coming_event/event_info.dart';
 import 'package:vida/ui/components/common/coming_event/event_reservation.dart';
 
 class ReservationBuilderCourse extends StatelessWidget {
@@ -54,13 +52,7 @@ class ReservationBuilderCourse extends StatelessWidget {
                   ),
                 ],
               ),
-              child: CustomTabBar(
-                tabBarViews: [
-                  EventReservation(),
-                  EventReservation(),
-                  EventInfo(),
-                ],
-              ),
+              child: EventReservation(pageSource: 'courses'),
             ),
           ),
         ],

@@ -35,7 +35,7 @@ class ContainerBody extends StatelessWidget {
       padding: EdgeInsets.only(bottom: 15.h),
       child: Container(
         width: 220.w,
-        height: heightContainer * 0.51,
+        height: heightContainer * 0.5,
         decoration: BoxDecoration(
           color: colorScheme.shadow,
           borderRadius: BorderRadius.circular(20.r),
@@ -75,12 +75,15 @@ class ContainerBody extends StatelessWidget {
               ),
 
               const SizedBox(height: 8),
-              Text(
-                title,
-                style: TextStyle(
-                  fontSize: 18.sp,
-                  fontWeight: FontWeight.bold,
-                  color: colorScheme.primary,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.bold,
+                    color: colorScheme.primary,
+                  ),
                 ),
               ),
               const SizedBox(height: 8),

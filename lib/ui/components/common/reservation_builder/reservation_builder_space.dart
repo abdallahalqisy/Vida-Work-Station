@@ -3,8 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vida/constants/theme.dart';
 import 'package:vida/models/space_model.dart';
 import 'package:vida/ui/components/common/body/container_body_reservation.dart';
-import 'package:vida/ui/components/common/body/custom_tab_bar.dart';
-import 'package:vida/ui/components/common/coming_event/event_info.dart';
 import 'package:vida/ui/components/common/coming_event/event_reservation.dart';
 
 class ReservationBuilderSpace extends StatelessWidget {
@@ -29,21 +27,23 @@ class ReservationBuilderSpace extends StatelessWidget {
       body: ListView(
         children: [
           ContainerBodyReservation(
-            title: space.type,
-            subTitle: space.name,
+            title: space.name,
+            subTitle: space.type,
             description: space.instructorEmail,
             number: 5,
             image: space.imageUrl,
             details:
                 space.requiresApproval
                     ? 'Requires approval'
-                    : 'Available for reservation', capacity: space.capacity,
+                    : 'Available for reservation',
+            capacity: space.capacity,
           ),
-          const SizedBox(height: 20),
+          const Spacer(),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 8.w),
             child: Container(
               width: double.infinity,
+              // height: 200.h,
               decoration: BoxDecoration(
                 color: colorScheme.shadow,
                 borderRadius: BorderRadius.circular(10.r),
@@ -56,12 +56,9 @@ class ReservationBuilderSpace extends StatelessWidget {
                   ),
                 ],
               ),
-              child: CustomTabBar(
-                tabBarViews: [
-                  EventReservation(),
-                  EventReservation(),
-                  EventInfo(),
-                ],
+              child: EventReservation(
+                pageSource: 'space',
+                spaceType: space.type,
               ),
             ),
           ),

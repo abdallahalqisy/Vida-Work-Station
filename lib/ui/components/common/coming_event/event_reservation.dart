@@ -6,7 +6,10 @@ import 'package:vida/ui/components/common/text_form_field/text_form_field_reserv
 import 'package:vida/ui/components/common/time_reservation.dart';
 
 class EventReservation extends StatelessWidget {
-  EventReservation({super.key});
+  final String pageSource;
+  final String? spaceType;
+
+  EventReservation({super.key, required this.pageSource, this.spaceType});
 
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
@@ -18,6 +21,7 @@ class EventReservation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
+
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
       child: Directionality(
@@ -25,56 +29,97 @@ class EventReservation extends StatelessWidget {
         child: Form(
           key: _formKey,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              BookingScreen(),
-              const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  TextFormFieldReservation(
-                    hintText: 'الاسم بالكامل',
-                    direction1: TextDirection.rtl,
-                    direction2: TextDirection.rtl,
-                    controller: nameController,
-                    maxLines: 1,
-                    keyboardType: TextInputType.name,
-                    width: width * 0.54,
-                    height: 80,
-                    textInputAction: TextInputAction.next,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'الرجاء ادخال الاسم';
-                      }
-
-                      return null;
-                    },
+              Center(
+                child: Text(
+                  'احجز الان',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: colorScheme.primary,
                   ),
-                  const SizedBox(width: 10),
-                  TextFormFieldReservation(
-                    hintText: 'عدد الافراد',
-                    direction1: TextDirection.ltr,
-                    direction2: TextDirection.ltr,
-                    controller: numberController,
-                    maxLines: 1,
-                    keyboardType: TextInputType.number,
-                    width: width * 0.33,
-                    height: 80,
-                    textInputAction: TextInputAction.next,
-                    validator: (value) {
-                      int? number = int.tryParse(value!);
-                      if (number == null || number <= 0) {
-                        return 'الرجاء ادخال عدد صحيح موجب';
-                      }
-                      if (value.isEmpty) {
-                        return 'الرجاء ادخال عدد الافراد';
-                      }
-
-                      return null;
-                    },
-                  ),
-                ],
+                ),
               ),
+              Divider(),
+
+              if (pageSource == "courses")
+                const SizedBox()
+              else if (pageSource == "space" && spaceType != null)
+                TimeReservation(spaceType: spaceType!)
+              else
+                const SizedBox(),
+
+              const SizedBox(height: 20),
+
+              if (pageSource == "courses")
+                TextFormFieldReservation(
+                  hintText: 'الاسم بالكامل',
+                  direction1: TextDirection.rtl,
+                  direction2: TextDirection.rtl,
+                  controller: nameController,
+                  maxLines: 1,
+                  keyboardType: TextInputType.name,
+                  width: width * 0.54,
+                  height: 80,
+                  textInputAction: TextInputAction.next,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'الرجاء ادخال الاسم';
+                    }
+                    return null;
+                  },
+                )
+              else if (pageSource == "space" && spaceType != null) ...[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Flexible(
+                      flex: 2, // 2/3 of the row
+                      child: TextFormFieldReservation(
+                        hintText: 'الاسم بالكامل',
+                        direction1: TextDirection.rtl,
+                        direction2: TextDirection.rtl,
+                        controller: nameController,
+                        maxLines: 1,
+                        keyboardType: TextInputType.name,
+                        height: 80,
+                        textInputAction: TextInputAction.next,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'الرجاء ادخال الاسم';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Flexible(
+                      flex: 1, // 1/3 of the row
+                      child: TextFormFieldReservation(
+                        hintText: 'عدد الافراد',
+                        direction1: TextDirection.ltr,
+                        direction2: TextDirection.ltr,
+                        controller: numberController,
+                        maxLines: 1,
+                        keyboardType: TextInputType.number,
+                        height: 80,
+                        textInputAction: TextInputAction.next,
+                        validator: (value) {
+                          int? number = int.tryParse(value!);
+                          if (number == null || number <= 0) {
+                            return 'الرجاء ادخال عدد صحيح موجب';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ] else
+                const SizedBox(),
+
+              const SizedBox(height: 10),
 
               TextFormFieldReservation(
                 hintText: 'البريد الالكتروني',
@@ -98,6 +143,8 @@ class EventReservation extends StatelessWidget {
                 },
               ),
 
+              const SizedBox(height: 10),
+
               TextFormFieldReservation(
                 hintText: 'رقم الهاتف',
                 direction1: TextDirection.rtl,
@@ -119,6 +166,8 @@ class EventReservation extends StatelessWidget {
                 },
               ),
 
+              const SizedBox(height: 10),
+
               TextFormFieldReservation(
                 hintText: 'ملاحظات',
                 direction1: TextDirection.rtl,
@@ -133,7 +182,9 @@ class EventReservation extends StatelessWidget {
                   return null;
                 },
               ),
+
               const SizedBox(height: 20),
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -142,7 +193,7 @@ class EventReservation extends StatelessWidget {
                     text: 'تاكيد الحجز',
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        // Do something with the form data
+                        // Process the reservation
                       }
                     },
                     minWidth: 100,

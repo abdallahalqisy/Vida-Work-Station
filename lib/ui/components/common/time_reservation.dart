@@ -1,41 +1,78 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart'; // For formatting dates
+import 'package:intl/intl.dart';
 import 'package:vida/constants/theme.dart';
+import 'package:vida/services/api_services/availability_services.dart';
 
-class BookingScreen extends StatefulWidget {
-  const BookingScreen({super.key});
+class TimeReservation extends StatefulWidget {
+  final String spaceType;
+
+  const TimeReservation({super.key, required this.spaceType});
 
   @override
-  _BookingScreenState createState() => _BookingScreenState();
+  _TimeReservationState createState() => _TimeReservationState();
 }
 
-class _BookingScreenState extends State<BookingScreen> {
+class _TimeReservationState extends State<TimeReservation> {
   late String selectedDate;
   String? selectedTime;
 
-  final List<String> timeSlots = [
-    "am:09:00",
-    "am:10:00",
-    "am:11:00",
-    "pm:12:00",
-    "pm:01:00",
-    "pm:02:00",
-    "pm:03:00",
-    "pm:04:00",
-    "pm:05:00",
-    "pm:06:00",
-    "pm:07:00",
-    "pm:08:00",
-    "pm:09:00",
-    "pm:10:00",
-  ];
+  List<String> timeSlots = [];
+  bool isLoading = true;
+  bool isError = false;
+  final availabilityService = AvailabilityServices();
 
   @override
   void initState() {
     super.initState();
-    selectedDate = DateFormat(
-      'yyyy-MM-dd',
-    ).format(DateTime.now()); // Default to today's date
+    selectedDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
+    fetchTimeSlots();
+  }
+
+  Future<void> fetchTimeSlots() async {
+    setState(() {
+      isLoading = true;
+      isError = false;
+    });
+
+    try {
+      final availabilityList = await availabilityService.fetchAvailability();
+      final selectedDay =
+          DateTime.parse(selectedDate).weekday; // 1=Monday, 7=Sunday
+
+      final dayAvailability =
+          availabilityList
+              .where(
+                (availability) =>
+                    availability.dayOfWeek == selectedDay &&
+                    availability.isActive,
+              )
+              .toList();
+
+      if (dayAvailability.isNotEmpty) {
+        final slots =
+            dayAvailability.map((availability) {
+              final openFormatted = _formatTime(availability.openTime);
+              final closeFormatted = _formatTime(availability.closeTime);
+              return '$openFormatted - $closeFormatted';
+            }).toList();
+
+        setState(() {
+          timeSlots = slots;
+          isLoading = false;
+        });
+      } else {
+        setState(() {
+          timeSlots = [];
+          isLoading = false;
+        });
+      }
+    } catch (e) {
+      print('Error fetching availability: $e');
+      setState(() {
+        isError = true;
+        isLoading = false;
+      });
+    }
   }
 
   List<String> getUpcomingDates() {
@@ -45,12 +82,21 @@ class _BookingScreenState extends State<BookingScreen> {
     });
   }
 
+  String _formatTime(String timeString) {
+    try {
+      final parsedTime = DateFormat.Hms().parse(timeString); // Expects HH:mm:ss
+      return DateFormat.Hm().format(parsedTime); // Converts to HH:mm
+    } catch (e) {
+      return timeString; // fallback
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     return Container(
       width: double.infinity,
-      height: height * 0.3,
+      height: height * 0.15,
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey[300]!),
         color: colorScheme.shadow,
@@ -60,7 +106,7 @@ class _BookingScreenState extends State<BookingScreen> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            /// **Dropdown for Date Selection**
+            /// Dropdown for Date Selection
             Row(
               children: [
                 Text(
@@ -82,9 +128,13 @@ class _BookingScreenState extends State<BookingScreen> {
                     menuMaxHeight: 400,
                     value: selectedDate,
                     onChanged: (String? newValue) {
-                      setState(() {
-                        selectedDate = newValue!;
-                      });
+                      if (newValue != null) {
+                        setState(() {
+                          selectedDate = newValue;
+                          selectedTime = null;
+                        });
+                        fetchTimeSlots();
+                      }
                     },
                     items:
                         getUpcomingDates().map<DropdownMenuItem<String>>((
@@ -99,46 +149,64 @@ class _BookingScreenState extends State<BookingScreen> {
                 ),
               ],
             ),
-            Divider(),
-            SizedBox(height: 10),
 
-            Wrap(
-              spacing: 10,
-              runSpacing: 10,
-              children:
-                  timeSlots.map((time) {
-                    return GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          selectedTime = time;
-                        });
-                      },
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                          vertical: 8,
-                          horizontal: 8,
-                        ),
-                        decoration: BoxDecoration(
-                          color:
-                              selectedTime == time
-                                  ? Colors.blue[300]
-                                  : Colors.grey[300],
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Text(
-                          time,
-                          style: TextStyle(
-                            fontSize: 16,
+            const Divider(),
+            const SizedBox(height: 10),
+
+            if (isLoading)
+              const Center(child: CircularProgressIndicator())
+            else if (isError)
+              Center(
+                child: Text(
+                  "حدث خطأ أثناء تحميل الأوقات",
+                  style: TextStyle(color: Colors.red, fontSize: 16),
+                ),
+              )
+            else if (timeSlots.isEmpty)
+              Center(
+                child: Text(
+                  "لا توجد مواعيد متاحة",
+                  style: TextStyle(color: Colors.orange, fontSize: 16),
+                ),
+              )
+            else
+              Wrap(
+                spacing: 10,
+                runSpacing: 10,
+                children:
+                    timeSlots.map((time) {
+                      return GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            selectedTime = time;
+                          });
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 8,
+                            horizontal: 8,
+                          ),
+                          decoration: BoxDecoration(
                             color:
                                 selectedTime == time
-                                    ? Colors.white
-                                    : Colors.black,
+                                    ? Colors.blue[300]
+                                    : Colors.grey[300],
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Text(
+                            time,
+                            style: TextStyle(
+                              fontSize: 16,
+                              color:
+                                  selectedTime == time
+                                      ? Colors.white
+                                      : Colors.black,
+                            ),
                           ),
                         ),
-                      ),
-                    );
-                  }).toList(),
-            ),
+                      );
+                    }).toList(),
+              ),
           ],
         ),
       ),
