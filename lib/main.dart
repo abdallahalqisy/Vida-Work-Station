@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:vida/auth_cubit/auth_cubit.dart';
 import 'package:vida/ui/screens/app/home/home_screen.dart';
 import 'package:vida/ui/screens/onboarding/login_screen.dart';
 
@@ -17,7 +19,10 @@ class VidaApp extends StatelessWidget {
     if (token != null && token.isNotEmpty) {
       return HomeScreen();
     } else {
-      return LoginScreen();
+      return BlocProvider(
+        create: (context) => AuthCubit(),
+        child: LoginScreen(),
+      );
     }
   }
 

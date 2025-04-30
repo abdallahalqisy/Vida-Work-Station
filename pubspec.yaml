@@ -28,19 +28,20 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  bloc: ^9.0.0
   cupertino_icons: ^1.0.8
   dio: ^5.8.0+1
   flutter:
     sdk: flutter
+  flutter_bloc: ^9.1.0
   flutter_native_splash: ^2.4.5
   flutter_screenutil: ^5.9.3
   flutter_tawkto: ^0.0.4
   gif_view: ^1.0.0
   intl: ^0.20.2
+  jwt_decoder: ^2.0.1
   shared_preferences: ^2.5.3
   url_launcher: ^6.3.1
-  jwt_decoder: ^2.0.1
-
 
 dev_dependencies:
   flutter_lints: ^5.0.0
@@ -71,11 +72,11 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-     - family: PlayfairDisplay
-       fonts:
-         - asset: assets/fonts/static/PlayfairDisplay-Regular.ttf
-         - asset: assets/fonts/static/PlayfairDisplay-Italic.ttf
-           style: italic
+    - family: PlayfairDisplay
+      fonts:
+        - asset: assets/fonts/static/PlayfairDisplay-Regular.ttf
+        - asset: assets/fonts/static/PlayfairDisplay-Italic.ttf
+          style: italic
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf
