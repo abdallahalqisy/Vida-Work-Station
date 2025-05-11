@@ -1,11 +1,14 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:vida/auth_cubit/auth_cubit.dart';
 import 'package:vida/constants/theme.dart';
 import 'package:vida/ui/screens/app/home/grid_view_screens/coming_events/coming_events.dart';
 import 'package:vida/ui/screens/app/home/grid_view_screens/course/Courses.dart';
 import 'package:vida/ui/screens/app/home/grid_view_screens/meeting_rooms/meeting_rooms.dart';
 import 'package:vida/ui/screens/app/home/grid_view_screens/training_rooms/training_rooms.dart';
+import 'package:vida/ui/screens/news_screen.dart';
 import 'package:vida/ui/screens/onboarding/login_screen.dart';
 
 class HomeDrawer extends StatefulWidget {
@@ -157,7 +160,13 @@ class _HomeDrawerState extends State<HomeDrawer> {
               _buildDrawerItem(
                 icon: Icons.newspaper,
                 title: 'آخر الأخبار',
-                onTap: () {}, // Add your functionality here
+                onTap:
+                    () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const NewsScreen(),
+                      ),
+                    ), // Add your functionality here
               ),
 
               const Divider(thickness: 1.5, indent: 16, endIndent: 16),
@@ -196,7 +205,13 @@ class _HomeDrawerState extends State<HomeDrawer> {
                   if (context.mounted) {
                     Navigator.pushAndRemoveUntil(
                       context,
-                      MaterialPageRoute(builder: (context) => LoginScreen()),
+                      MaterialPageRoute(
+                        builder:
+                            (context) => BlocProvider(
+                              create: (context) => AuthCubit(),
+                              child: LoginScreen(),
+                            ),
+                      ),
                       (route) => false,
                     );
                   }

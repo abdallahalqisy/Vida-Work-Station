@@ -32,7 +32,7 @@ class ContainerBodyReservation extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
       child: Container(
         width: double.infinity,
-        height: heightContainer * 0.28,
+        height: heightContainer * 0.30,
         decoration: BoxDecoration(
           color: colorScheme.shadow,
           borderRadius: BorderRadius.circular(20.r),
@@ -162,8 +162,7 @@ class ContainerBodyReservation extends StatelessWidget {
               const SizedBox(height: 5),
               CustomButton(
                 text: details,
-                onPressed: () {
-                },
+                onPressed: () {},
                 minWidth: 100,
                 color: colorScheme.surface,
                 textColor: colorScheme.shadow,

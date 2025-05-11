@@ -10,6 +10,7 @@ import 'package:vida/ui/components/common/text_form_field/custom_text_form_field
 import 'package:vida/ui/screens/app/home/home_screen.dart';
 import 'package:vida/ui/screens/onboarding/signup_screen.dart';
 
+// ignore: must_be_immutable
 class LoginForm extends StatelessWidget {
   LoginForm({super.key});
 
@@ -83,7 +84,7 @@ class LoginForm extends StatelessWidget {
                 onChanged: (data) {
                   password = data;
                 },
-                textInputAction: TextInputAction.done,
+                textInputAction: TextInputAction.next,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter your password';
