@@ -35,6 +35,9 @@ class LoginForm extends StatelessWidget {
         }
       },
       builder: (context, state) {
+        if (state is LoginLoadingState) {
+          return const Center(child: PulseLoadingIndicator());
+        }
         return Form(
           key: formKey,
           child: Column(
@@ -97,18 +100,16 @@ class LoginForm extends StatelessWidget {
                 icon: Icons.lock,
               ),
               SizedBox(height: 30.h),
-              state is LoginLoadingState
-                  ? const PulseLoadingIndicator()
-                  : CustomButton(
-                    text: 'Login',
-                    onPressed: () async {
-                      if (formKey.currentState!.validate()) {
-                        cubit.loginUser({}, email!, password!);
-                      }
-                    },
-                    textColor: colorScheme.shadow,
-                    buttonColor: colorScheme.surface,
-                  ),
+              CustomButton(
+                text: 'Login',
+                onPressed: () async {
+                  if (formKey.currentState!.validate()) {
+                    cubit.loginUser({}, email!, password!);
+                  }
+                },
+                textColor: colorScheme.shadow,
+                buttonColor: colorScheme.surface,
+              ),
               SizedBox(height: 10.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

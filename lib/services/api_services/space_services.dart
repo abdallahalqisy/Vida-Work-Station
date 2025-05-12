@@ -20,4 +20,23 @@ class SpaceServices {
       throw Exception('Failed to fetch space: $e');
     }
   }
+
+  // Reservation Spaces to api
+  Future<void> reserveSpace({
+    required int spaceId,
+    required String userId,
+    required int availabilityId,
+  }) async {
+    try {
+      final response = await Dio().post('$baseUrl/Space/space-reservation');
+
+      if (response.statusCode == 200) {
+        print('Space reserved successfully');
+      } else {
+        throw Exception('Failed to reserve space: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Failed to reserve space: $e');
+    }
+  }
 }

@@ -52,7 +52,10 @@ class ReservationBuilderCourse extends StatelessWidget {
                   ),
                 ],
               ),
-              child: EventReservation(pageSource: 'courses'),
+              child: EventReservation(
+                pageSource: 'courses',
+                courseId: course.id!,
+              ),
             ),
           ),
         ],

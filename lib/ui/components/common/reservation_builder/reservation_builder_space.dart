@@ -38,7 +38,7 @@ class ReservationBuilderSpace extends StatelessWidget {
                     : 'Available for reservation',
             capacity: space.capacity,
           ),
-          const Spacer(),
+          const SizedBox(height: 20),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 8.w),
             child: Container(
@@ -59,6 +59,7 @@ class ReservationBuilderSpace extends StatelessWidget {
               child: EventReservation(
                 pageSource: 'space',
                 spaceType: space.type,
+
               ),
             ),
           ),

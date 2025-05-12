@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:vida/constants/theme.dart';
 import 'package:vida/models/news_model.dart';
 import 'package:intl/intl.dart';
-import 'package:vida/services/api_services/newa_services.dart';
+import 'package:vida/services/api_services/news_services.dart';
 import 'package:vida/ui/components/common/loading.dart';
 
 class NewsScreen extends StatefulWidget {
-  const NewsScreen({Key? key}) : super(key: key);
+  const NewsScreen({super.key});
 
   @override
   State<NewsScreen> createState() => _NewsScreenState();
@@ -23,7 +24,17 @@ class _NewsScreenState extends State<NewsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Text(
+          'News',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+        ),
+        backgroundColor: colorScheme.surface,
+        leading: IconButton(
+          onPressed: () => Navigator.pop(context),
+          icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+        ),
+      ),
       body: FutureBuilder<List<Welcome>>(
         future: _newsFuture,
         builder: (context, snapshot) {

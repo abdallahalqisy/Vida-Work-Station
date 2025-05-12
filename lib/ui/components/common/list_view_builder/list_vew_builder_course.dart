@@ -39,7 +39,6 @@ class ListViewBuildCourse extends StatelessWidget {
               description: course.description!,
               description2: course.instructorEmail!,
               number: 5,
-              // You can put course.maxParticipants here
               price: course.price!,
               onPressed:
                   course.isActive!

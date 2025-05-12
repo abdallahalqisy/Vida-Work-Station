@@ -1,5 +1,4 @@
 // fetch courses from api
-
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
@@ -24,7 +23,10 @@ class CourseServices {
   }
 
   // Reservation Courses to api
-  Future<void> reserveCourse(int courseId, String userId) async {
+  Future<void> reserveCourse({
+    required int courseId,
+    required String userId,
+  }) async {
     try {
       final response = await Dio().post('$baseUrl/Course/course-reservation');
 

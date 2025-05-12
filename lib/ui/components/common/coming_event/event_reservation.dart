@@ -1,22 +1,67 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vida/constants/theme.dart';
+import 'package:vida/services/api_services/course_services.dart';
 import 'package:vida/ui/components/common/buttons/custom_button_reservation.dart';
 import 'package:vida/ui/components/common/text_form_field/text_form_field_reservation.dart';
 import 'package:vida/ui/components/common/time_reservation.dart';
 
-class EventReservation extends StatelessWidget {
+class EventReservation extends StatefulWidget {
   final String pageSource;
   final String? spaceType;
+  final int? courseId;
 
-  EventReservation({super.key, required this.pageSource, this.spaceType});
+  const EventReservation({
+    super.key,
+    required this.pageSource,
+    this.spaceType,
+    this.courseId,
+  });
 
+  @override
+  State<EventReservation> createState() => _EventReservationState();
+}
+
+class _EventReservationState extends State<EventReservation> {
   final TextEditingController nameController = TextEditingController();
+
   final TextEditingController emailController = TextEditingController();
+
   final TextEditingController phoneController = TextEditingController();
+
   final TextEditingController noteController = TextEditingController();
+
   final TextEditingController numberController = TextEditingController();
+
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  final CourseServices courseServices = CourseServices();
+  late String user_id;
+
+  @override
+  void initState() {
+    super.initState();
+    userId();
+  }
+
+  void userId() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    user_id = prefs.getString('userId')!;
+    log(userId.toString());
+  }
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    emailController.dispose();
+    phoneController.dispose();
+    noteController.dispose();
+    numberController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,16 +88,16 @@ class EventReservation extends StatelessWidget {
               ),
               Divider(),
 
-              if (pageSource == "courses")
+              if (widget.pageSource == "courses")
                 const SizedBox()
-              else if (pageSource == "space" && spaceType != null)
-                TimeReservation(spaceType: spaceType!)
+              else if (widget.pageSource == "space" && widget.spaceType != null)
+                TimeReservation(spaceType: widget.spaceType!)
               else
                 const SizedBox(),
 
               const SizedBox(height: 20),
 
-              if (pageSource == "courses")
+              if (widget.pageSource == "courses")
                 TextFormFieldReservation(
                   hintText: 'الاسم بالكامل',
                   direction1: TextDirection.rtl,
@@ -70,7 +115,8 @@ class EventReservation extends StatelessWidget {
                     return null;
                   },
                 )
-              else if (pageSource == "space" && spaceType != null) ...[
+              else if (widget.pageSource == "space" &&
+                  widget.spaceType != null) ...[
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -193,7 +239,18 @@ class EventReservation extends StatelessWidget {
                     text: 'تاكيد الحجز',
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        // Process the reservation
+                        try {
+                          courseServices.reserveCourse(
+                            courseId: widget.courseId!,
+                            userId: user_id,
+                          );
+                        } on Exception catch (e) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text("Not Reservation"),
+                            ),
+                          );
+                        }
                       }
                     },
                     minWidth: 100,

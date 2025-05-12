@@ -8,7 +8,7 @@ import 'package:vida/ui/screens/app/home/grid_view_screens/coming_events/coming_
 import 'package:vida/ui/screens/app/home/grid_view_screens/course/Courses.dart';
 import 'package:vida/ui/screens/app/home/grid_view_screens/meeting_rooms/meeting_rooms.dart';
 import 'package:vida/ui/screens/app/home/grid_view_screens/training_rooms/training_rooms.dart';
-import 'package:vida/ui/screens/news_screen.dart';
+import 'package:vida/ui/screens/app/home/grid_view_screens/news_screen.dart';
 import 'package:vida/ui/screens/onboarding/login_screen.dart';
 
 class HomeDrawer extends StatefulWidget {

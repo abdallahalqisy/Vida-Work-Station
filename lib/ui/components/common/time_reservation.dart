@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:vida/constants/theme.dart';
@@ -36,8 +37,7 @@ class _TimeReservationState extends State<TimeReservation> {
 
     try {
       final availabilityList = await availabilityService.fetchAvailability();
-      final selectedDay =
-          DateTime.parse(selectedDate).weekday; // 1=Monday, 7=Sunday
+      final selectedDay = DateTime.parse(selectedDate).weekday;
 
       final dayAvailability =
           availabilityList
@@ -67,7 +67,7 @@ class _TimeReservationState extends State<TimeReservation> {
         });
       }
     } catch (e) {
-      print('Error fetching availability: $e');
+      log('Error fetching availability: $e');
       setState(() {
         isError = true;
         isLoading = false;
@@ -84,10 +84,10 @@ class _TimeReservationState extends State<TimeReservation> {
 
   String _formatTime(String timeString) {
     try {
-      final parsedTime = DateFormat.Hms().parse(timeString); // Expects HH:mm:ss
-      return DateFormat.Hm().format(parsedTime); // Converts to HH:mm
+      final parsedTime = DateFormat.Hms().parse(timeString);
+      return DateFormat.Hm().format(parsedTime);
     } catch (e) {
-      return timeString; // fallback
+      return timeString;
     }
   }
 
@@ -96,7 +96,7 @@ class _TimeReservationState extends State<TimeReservation> {
     final height = MediaQuery.of(context).size.height;
     return Container(
       width: double.infinity,
-      height: height * 0.15,
+      height: height * 0.25,
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey[300]!),
         color: colorScheme.shadow,
@@ -106,7 +106,6 @@ class _TimeReservationState extends State<TimeReservation> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            /// Dropdown for Date Selection
             Row(
               children: [
                 Text(
@@ -123,9 +122,10 @@ class _TimeReservationState extends State<TimeReservation> {
                     border: Border.all(color: Colors.grey[300]!),
                     borderRadius: BorderRadius.circular(8),
                   ),
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: DropdownButton<String>(
                     iconSize: 30,
-                    menuMaxHeight: 400,
+                    underline: const SizedBox(),
                     value: selectedDate,
                     onChanged: (String? newValue) {
                       if (newValue != null) {
@@ -137,9 +137,7 @@ class _TimeReservationState extends State<TimeReservation> {
                       }
                     },
                     items:
-                        getUpcomingDates().map<DropdownMenuItem<String>>((
-                          String value,
-                        ) {
+                        getUpcomingDates().map((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
                             child: Text(value),
@@ -149,21 +147,20 @@ class _TimeReservationState extends State<TimeReservation> {
                 ),
               ],
             ),
-
             const Divider(),
             const SizedBox(height: 10),
 
             if (isLoading)
               const Center(child: CircularProgressIndicator())
             else if (isError)
-              Center(
+              const Center(
                 child: Text(
                   "حدث خطأ أثناء تحميل الأوقات",
                   style: TextStyle(color: Colors.red, fontSize: 16),
                 ),
               )
             else if (timeSlots.isEmpty)
-              Center(
+              const Center(
                 child: Text(
                   "لا توجد مواعيد متاحة",
                   style: TextStyle(color: Colors.orange, fontSize: 16),
@@ -171,10 +168,11 @@ class _TimeReservationState extends State<TimeReservation> {
               )
             else
               Wrap(
-                spacing: 10,
-                runSpacing: 10,
+                spacing: 12,
+                runSpacing: 12,
                 children:
                     timeSlots.map((time) {
+                      final isSelected = selectedTime == time;
                       return GestureDetector(
                         onTap: () {
                           setState(() {
@@ -183,24 +181,21 @@ class _TimeReservationState extends State<TimeReservation> {
                         },
                         child: Container(
                           padding: const EdgeInsets.symmetric(
-                            vertical: 8,
-                            horizontal: 8,
+                            vertical: 10,
+                            horizontal: 12,
                           ),
                           decoration: BoxDecoration(
                             color:
-                                selectedTime == time
+                                isSelected
                                     ? Colors.blue[300]
                                     : Colors.grey[300],
-                            borderRadius: BorderRadius.circular(8),
+                            borderRadius: BorderRadius.circular(10),
                           ),
                           child: Text(
                             time,
                             style: TextStyle(
-                              fontSize: 16,
-                              color:
-                                  selectedTime == time
-                                      ? Colors.white
-                                      : Colors.black,
+                              fontSize: 15,
+                              color: isSelected ? Colors.white : Colors.black,
                             ),
                           ),
                         ),

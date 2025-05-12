@@ -12,6 +12,7 @@ import 'package:vida/ui/components/common/buttons/custom_button_authentication.d
 import 'package:vida/ui/components/common/text_form_field/custom_text_form_field_auth.dart';
 import 'package:vida/ui/screens/onboarding/login_screen.dart';
 
+// ignore: must_be_immutable
 class SignupForm extends StatelessWidget {
   SignupForm({super.key});
 
@@ -36,6 +37,9 @@ class SignupForm extends StatelessWidget {
         }
       },
       builder: (context, state) {
+        if (state is RegisterLoadingState) {
+          return const Center(child: PulseLoadingIndicator());
+        }
         return Form(
           key: formKey,
           child: SingleChildScrollView(
@@ -130,37 +134,33 @@ class SignupForm extends StatelessWidget {
                   icon: Icons.lock,
                 ),
                 SizedBox(height: 30.h),
-                state is RegisterLoadingState
-                    ? const PulseLoadingIndicator()
-                    : CustomButton(
-                      text: 'Sign up',
-                      onPressed: () async {
-                        if (formKey.currentState!.validate()) {
-                          try {
-                            await cubit.registerUser(
-                              name!,
-                              password!,
-                              email!,
-                              phone!,
-                            );
-                          } catch (e) {
-                            log('Unexpected error: $e');
-                            if (context.mounted) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text(
-                                    "An unexpected error occurred.",
-                                  ),
-                                  backgroundColor: Colors.red,
-                                ),
-                              );
-                            }
-                          }
+                CustomButton(
+                  text: 'Sign up',
+                  onPressed: () async {
+                    if (formKey.currentState!.validate()) {
+                      try {
+                        await cubit.registerUser(
+                          name!,
+                          password!,
+                          email!,
+                          phone!,
+                        );
+                      } catch (e) {
+                        log('Unexpected error: $e');
+                        if (context.mounted) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text("An unexpected error occurred."),
+                              backgroundColor: Colors.red,
+                            ),
+                          );
                         }
-                      },
-                      textColor: colorScheme.shadow,
-                      buttonColor: colorScheme.surface,
-                    ),
+                      }
+                    }
+                  },
+                  textColor: colorScheme.shadow,
+                  buttonColor: colorScheme.surface,
+                ),
                 SizedBox(height: 10.h),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
