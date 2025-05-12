@@ -45,7 +45,7 @@ class CoursesModel {
       availability:
           json['availability'] != null
               ? AvailabilityModel.fromJson(json['availability'])
-              : AvailabilityModel.empty(), // you should create an empty() constructor
+              : AvailabilityModel.empty(),
     );
   }
 }

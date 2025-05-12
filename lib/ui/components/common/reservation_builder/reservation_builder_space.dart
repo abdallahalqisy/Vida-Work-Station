@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vida/constants/theme.dart';
+import 'package:vida/models/courses_model/courses_model.dart';
 import 'package:vida/models/space_model.dart';
 import 'package:vida/ui/components/common/body/container_body_reservation.dart';
 import 'package:vida/ui/components/common/coming_event/event_reservation.dart';
 
 class ReservationBuilderSpace extends StatelessWidget {
-  const ReservationBuilderSpace({super.key, required this.space});
+  const ReservationBuilderSpace({super.key, required this.space, this.course});
 
   final SpaceModel space;
+  final CoursesModel? course;
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: colorScheme.surface,
@@ -59,7 +62,8 @@ class ReservationBuilderSpace extends StatelessWidget {
               child: EventReservation(
                 pageSource: 'space',
                 spaceType: space.type,
-
+                spaceId: space.id,
+                availabilityId: course?.availabilityId,
               ),
             ),
           ),

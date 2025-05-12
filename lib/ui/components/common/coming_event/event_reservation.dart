@@ -9,16 +9,22 @@ import 'package:vida/ui/components/common/buttons/custom_button_reservation.dart
 import 'package:vida/ui/components/common/text_form_field/text_form_field_reservation.dart';
 import 'package:vida/ui/components/common/time_reservation.dart';
 
+import 'package:vida/services/api_services/space_services.dart';
+
 class EventReservation extends StatefulWidget {
   final String pageSource;
   final String? spaceType;
   final int? courseId;
+  final int? spaceId;
+  final int? availabilityId;
 
   const EventReservation({
     super.key,
     required this.pageSource,
     this.spaceType,
     this.courseId,
+    this.spaceId,
+    this.availabilityId,
   });
 
   @override
@@ -39,6 +45,7 @@ class _EventReservationState extends State<EventReservation> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   final CourseServices courseServices = CourseServices();
+  final SpaceServices spaceServices = SpaceServices();
   late String user_id;
 
   @override
@@ -239,18 +246,16 @@ class _EventReservationState extends State<EventReservation> {
                     text: 'تاكيد الحجز',
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        try {
-                          courseServices.reserveCourse(
-                            courseId: widget.courseId!,
-                            userId: user_id,
-                          );
-                        } on Exception catch (e) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text("Not Reservation"),
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              "تم الحجز بنجاح",
+                              style: TextStyle(fontSize: 20),
                             ),
-                          );
-                        }
+                            backgroundColor: colorScheme.surface,
+                          ),
+                        );
+                        Navigator.pop(context);
                       }
                     },
                     minWidth: 100,
