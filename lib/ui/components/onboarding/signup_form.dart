@@ -12,12 +12,16 @@ import 'package:vida/ui/components/common/buttons/custom_button_authentication.d
 import 'package:vida/ui/components/common/text_form_field/custom_text_form_field_auth.dart';
 import 'package:vida/ui/screens/onboarding/login_screen.dart';
 
-// ignore: must_be_immutable
-class SignupForm extends StatelessWidget {
-  SignupForm({super.key});
+class SignupForm extends StatefulWidget {
+  const SignupForm({super.key});
 
-  String? name, email, password, phone;
+  @override
+  _SignupFormState createState() => _SignupFormState();
+}
+
+class _SignupFormState extends State<SignupForm> {
   final formKey = GlobalKey<FormState>();
+  String? name, email, password, phone;
 
   @override
   Widget build(BuildContext context) {
@@ -64,6 +68,7 @@ class SignupForm extends StatelessWidget {
                 CustomTextFormField(
                   labelText: 'Name',
                   hintText: 'John Doe',
+                  initialValue: name, // Retain the value
                   onChanged: (data) {
                     name = data;
                   },
@@ -80,6 +85,7 @@ class SignupForm extends StatelessWidget {
                 CustomTextFormField(
                   labelText: 'Phone Number',
                   hintText: '+201234567890',
+                  initialValue: phone, // Retain the value
                   onChanged: (data) {
                     phone = data;
                   },
@@ -97,6 +103,7 @@ class SignupForm extends StatelessWidget {
                   hintText: 'Test@gmail.com',
                   labelText: 'Email',
                   obscureText: false,
+                  initialValue: email, // Retain the value
                   onChanged: (data) {
                     email = data;
                   },
@@ -104,7 +111,8 @@ class SignupForm extends StatelessWidget {
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter your email';
-                    } else if (!RegExp(
+                    }
+                    if (!RegExp(
                       r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$",
                     ).hasMatch(value)) {
                       return 'Enter a valid email address';
@@ -118,6 +126,7 @@ class SignupForm extends StatelessWidget {
                   hintText: '**********',
                   obscureText: true,
                   labelText: 'Password',
+                  initialValue: password, // Retain the value
                   onChanged: (data) {
                     password = data;
                   },
@@ -125,9 +134,18 @@ class SignupForm extends StatelessWidget {
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter your password';
-                    } else if (value.length < 6 &&
-                        value.contains(RegExp(r'[@#$&]'))) {
-                      return 'Password must be at least 6 characters and special characters like @, #, \$, & are allowed';
+                    }
+                    // Check if the password is at least 6 characters long
+                    if (value.length < 6) {
+                      return 'Password must be at least 6 characters';
+                    }
+                    // Check if the password contains at least one letter
+                    if (!RegExp(r'[a-zA-Z]').hasMatch(value)) {
+                      return 'Password must contain at least one letter';
+                    }
+                    // Check if the password contains at least one special character
+                    if (!RegExp(r'[@#$&]').hasMatch(value)) {
+                      return 'Password must contain at least one special character (@, #, \$, &)';
                     }
                     return null;
                   },

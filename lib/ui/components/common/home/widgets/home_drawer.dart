@@ -171,17 +171,6 @@ class _HomeDrawerState extends State<HomeDrawer> {
 
               const Divider(thickness: 1.5, indent: 16, endIndent: 16),
 
-              _buildDrawerItem(
-                icon: Icons.info,
-                title: 'About',
-                onTap: () => Navigator.pop(context),
-              ),
-              _buildDrawerItem(
-                icon: Icons.contact_mail,
-                title: 'Contact',
-                onTap: () => Navigator.pop(context),
-              ),
-
               const Spacer(),
 
               ListTile(

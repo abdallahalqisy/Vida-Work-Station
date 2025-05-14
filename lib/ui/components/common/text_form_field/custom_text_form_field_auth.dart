@@ -12,6 +12,7 @@ class CustomTextFormField extends StatefulWidget {
     required this.textInputAction,
     required this.validator,
     required this.icon,
+    this.initialValue, // Added initialValue
   });
 
   final String labelText;
@@ -21,6 +22,7 @@ class CustomTextFormField extends StatefulWidget {
   final TextInputAction textInputAction;
   final String? Function(String?)? validator;
   final IconData? icon;
+  final String? initialValue; // Added initialValue
 
   @override
   State<CustomTextFormField> createState() => _CustomTextFormFieldState();
@@ -42,6 +44,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       padding: EdgeInsets.symmetric(horizontal: 10.w),
       child: TextFormField(
         key: fieldKey,
+        initialValue: widget.initialValue, // Set the initial value
         obscuringCharacter: '*',
         keyboardType: TextInputType.text,
         onChanged: (value) {
@@ -62,9 +65,12 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             borderSide: BorderSide(color: colorScheme.primary, width: 2.w),
           ),
           labelText: widget.labelText,
-          labelStyle: TextStyle(color: Color(0xff003367), fontSize: 15.sp),
+          labelStyle: TextStyle(
+            color: const Color(0xff003367),
+            fontSize: 15.sp,
+          ),
           hintText: widget.hintText,
-          hintStyle: TextStyle(color: Color(0xff003367), fontSize: 15.sp),
+          hintStyle: TextStyle(color: const Color(0xff003367), fontSize: 15.sp),
           suffixIcon:
               (widget.obscureText)
                   ? IconButton(

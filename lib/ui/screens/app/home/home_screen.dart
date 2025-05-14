@@ -132,8 +132,6 @@ class _HomeScreenState extends State<HomeScreen>
                 ),
               ),
               SizedBox(height: 20.h),
-              SizedBox(height: 250.h, child: CustomListView()),
-              SizedBox(height: 10.h),
             ],
           ),
         ),

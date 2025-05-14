@@ -26,7 +26,7 @@ class GridViewInHomeScreen extends StatelessWidget {
     const ComingEvents(),
     const TrainingRooms(),
     const MeetingRooms(),
-     Courses(),
+    Courses(),
   ];
 
   @override
@@ -43,31 +43,31 @@ class GridViewInHomeScreen extends StatelessWidget {
       // Number of items
       shrinkWrap: true,
       itemBuilder: (context, index) {
-        return Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(10),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 1,
-                blurRadius: 5,
-                offset: const Offset(0, 3),
-              ),
-            ],
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(images[index % 4], width: 100.w, height: 100.h),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => pages[index % 4]),
-                  );
-                },
-                child: Text(
+        return GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => pages[index % 4]),
+            );
+          },
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 1,
+                  blurRadius: 5,
+                  offset: const Offset(0, 3),
+                ),
+              ],
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(images[index % 4], width: 100.w, height: 100.h),
+                Text(
                   title[index % 4],
                   style: TextStyle(
                     color: colorScheme.primary,
@@ -75,8 +75,8 @@ class GridViewInHomeScreen extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },

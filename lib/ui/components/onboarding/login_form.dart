@@ -10,10 +10,14 @@ import 'package:vida/ui/components/common/text_form_field/custom_text_form_field
 import 'package:vida/ui/screens/app/home/home_screen.dart';
 import 'package:vida/ui/screens/onboarding/signup_screen.dart';
 
-// ignore: must_be_immutable
-class LoginForm extends StatelessWidget {
-  LoginForm({super.key});
+class LoginForm extends StatefulWidget {
+  const LoginForm({super.key});
 
+  @override
+  _LoginFormState createState() => _LoginFormState();
+}
+
+class _LoginFormState extends State<LoginForm> {
   String? email, password;
   final formKey = GlobalKey<FormState>();
 
@@ -62,6 +66,7 @@ class LoginForm extends StatelessWidget {
                 hintText: 'Test@gmail.com',
                 labelText: 'Email',
                 obscureText: false,
+                initialValue: email, // Retain the value
                 onChanged: (data) {
                   email = data;
                 },
@@ -76,7 +81,6 @@ class LoginForm extends StatelessWidget {
                   }
                   return null;
                 },
-
                 icon: Icons.email_rounded,
               ),
               SizedBox(height: 10.h),
@@ -84,16 +88,17 @@ class LoginForm extends StatelessWidget {
                 hintText: '**********',
                 obscureText: true,
                 labelText: 'Password',
+                initialValue: password, // Retain the value
                 onChanged: (data) {
                   password = data;
                 },
-                textInputAction: TextInputAction.next,
+                textInputAction: TextInputAction.done,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter your password';
                   } else if (value.length < 6 &&
                       value.contains(RegExp(r'[@#$&]'))) {
-                    return 'Password must be at least 6 characters and Special characters like @, #,\$ ,  & are allowed';
+                    return 'Password must be at least 6 characters and special characters like @, #, \$, & are allowed';
                   }
                   return null;
                 },
@@ -150,7 +155,7 @@ class LoginForm extends StatelessWidget {
                       builder:
                           (context) => BlocProvider(
                             create: (context) => AuthCubit(),
-                            child: SignupScreen(),
+                            child: const SignupScreen(),
                           ),
                     ),
                   );
