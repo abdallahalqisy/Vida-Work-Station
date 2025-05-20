@@ -23,16 +23,19 @@
 ---
 
 ## 📱 Screenshots
+![Screenshot 2025-05-21 003803](https://github.com/user-attachments/assets/6021f78c-f4bb-47f6-849d-f8e77504a9fe)
 ![Splash Screen](https://github.com/user-attachments/assets/701bd3b9-4dca-4b8f-aa4a-08134d12077b)
 ![Login Screen](https://github.com/user-attachments/assets/70db65f3-2ba2-4ee6-972a-233de17e71a9)
 ![Singup Screen](https://github.com/user-attachments/assets/725f8a7b-119e-4563-9db1-30908d605a74)
 ![Home Screen](https://github.com/user-attachments/assets/a88ec79c-c2da-4d4b-9ad6-ab64008d77bc)
-![Screenshot_1747775929](https://github.com/user-attachments/assets/7c80f1d4-23b3-41dd-9ff4-f4198057813a)
-![Screenshot_1747776482](https://github.com/user-attachments/assets/84f0d81c-6365-4db1-8bed-4110b16998ca)
-![Screenshot_1747776139](https://github.com/user-attachments/assets/77b73b84-e605-4271-a88d-8e26d6017947)
-![Screenshot_1747775982](https://github.com/user-attachments/assets/80b07165-6aa0-49cc-92fb-d5d0d568dc6c)
-![Screenshot_1747775988](https://github.com/user-attachments/assets/8fa2c6c0-3800-4a6b-b56a-bab5fc4428ba)
-![Screenshot_1747776006](https://github.com/user-attachments/assets/e2dcbb6c-f8db-45f9-b3d4-c1ce5882a493)
+![Chat Screen](https://github.com/user-attachments/assets/7c80f1d4-23b3-41dd-9ff4-f4198057813a)
+![Loding](https://github.com/user-attachments/assets/84f0d81c-6365-4db1-8bed-4110b16998ca)
+![drawer](https://github.com/user-attachments/assets/77b73b84-e605-4271-a88d-8e26d6017947)
+![Training Screen](https://github.com/user-attachments/assets/80b07165-6aa0-49cc-92fb-d5d0d568dc6c)
+![Book meeting rooms screen](https://github.com/user-attachments/assets/8fa2c6c0-3800-4a6b-b56a-bab5fc4428ba)
+![Book courses screen](https://github.com/user-attachments/assets/e2dcbb6c-f8db-45f9-b3d4-c1ce5882a493)
+![News screen](https://github.com/user-attachments/assets/31fa46b9-7492-4d4a-9ddf-04afc1266023)
+![Screenshot_1747776015](https://github.com/user-attachments/assets/77754a0f-f73a-4004-a32a-1f10f4010ba8)
 
 
 
